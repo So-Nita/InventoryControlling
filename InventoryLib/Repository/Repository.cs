@@ -1,5 +1,6 @@
 using InventoryLib.DataConfiguration;
 using InventoryLib.Interface;
+using InventoryLib.Models.Response.Product;
 using Microsoft.EntityFrameworkCore;
 
 namespace InventoryLib.Repository;
@@ -14,6 +15,10 @@ public class Repository<TE> : IRepository<TE> where TE : class
 
     public async Task<IEnumerable<TE>> GetAll()=> await _context.Set<TE>().ToListAsync();
     
+    public IQueryable<TE?> GetQueryable()
+    {
+        return _context.Set<TE>().AsQueryable();
+    }
     public async Task<TE?> GetById(string id)
     {
         return await _context.Set<TE>().FindAsync(id);
