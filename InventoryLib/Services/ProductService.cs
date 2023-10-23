@@ -16,9 +16,9 @@ public class ProductService : IProductService
     {
         _unitOfWork = unitOfWork;
     }
-    public async Task<IEnumerable<ProductResponse?>> GetAllProducts()
+    public Task<List<ProductResponse>> GetAllProducts()
     {
-        var products =  _unitOfWork.GetRepository<Product>()
+        var products = _unitOfWork.GetRepository<Product>()
             .GetQueryable()
             .Include(e => e.Category)
             .Select(e => new ProductResponse()
@@ -32,11 +32,11 @@ public class ProductService : IProductService
                 CreatedAt = e.CreatedAt,
                 CategoryId = e.CategoryId,
                 CategoryName = e.Category.Name
-            }).ToListAsync().Result;
-        return products;
+            }).ToListAsync();
+        return Task.FromResult(products.Result);
     }
     
-    public Task<bool> CreateProduct(ProductCreateReq req)
+    public Task<Product> CreateProduct(ProductCreateReq req)
     {
         if(req.Code.IsNullOrEmpty()) throw new SecurityTokenException("Code is required");
         if (req.Name.IsNullOrEmpty()) throw new SecurityTokenException("Name is required");
@@ -59,12 +59,12 @@ public class ProductService : IProductService
         {
             _unitOfWork.GetRepository<Product>().Add(product);
             _unitOfWork.Save();
-            return Task.FromResult(true);
+            return Task.FromResult(product);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return Task.FromResult(false);
+            return Task.FromResult<Product>(null!);
         }
     }
 
@@ -80,7 +80,7 @@ public class ProductService : IProductService
     {
         if(req.Id.IsNullOrEmpty() || req.Code.IsNullOrEmpty()) throw new SecurityTokenException("Product identify is required");
         var product = _unitOfWork.GetRepository<Product>().GetQueryable().FirstOrDefault(e=>e.Id==req.Id||e.Code==req.Code);
-        
+        if(req.Price > req.SellPrice) throw new SecurityTokenException("Price must be less than Sell Price");
         if (product == null) throw new Exception("Product does not existing.");
         product.Name = req.Name;
         product.Price = req.Price;
@@ -99,9 +99,9 @@ public class ProductService : IProductService
         }
     }
 
-    public Task<bool> DeleteProduct(string productId)
+    public Task<bool> DeleteProduct(Key key)
     {
-        var product = _unitOfWork.GetRepository<Product>().GetById(productId).Result;
+        var product = _unitOfWork.GetRepository<Product>().GetQueryable().FirstOrDefault(e=> e.Code==key.Code || e.Id==key.Id);
         if (product == null) throw new Exception("Product does not existing.");
         try
         {
@@ -117,21 +117,5 @@ public class ProductService : IProductService
     }
 }
 
-public class ProductUpdateReq
-{
-    public string Id { get; set; } = "";
-    public string Code { get; set; } = "";
-    public string Name { get; set; } = "";
-    public decimal Price { get; set; }
-    public decimal SellPrice { get; set; }
-    public string? Description { get; set; }
-}
 
-public class ProductCreateReq
-{
-    public string Code { get; set; } = "";
-    public string Name { get; set; } = "";
-    public decimal Price { get; set; }
-    public decimal SellPrice { get; set; }
-    public string? Description { get; set; }
-}
+

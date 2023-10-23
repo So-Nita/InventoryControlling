@@ -1,18 +1,20 @@
 using InventoryLib.Models;
+using InventoryLib.Models.Request.Product;
 using InventoryLib.Models.Response.Product;
+using InventoryLib.Services;
 
 namespace InventoryLib.Interface;
 
 public interface IProductService
 {
-    Task<bool> CreateProduct(Product productDetails);
+    Task<Product> CreateProduct(ProductCreateReq productDetails);
 
-    Task<IEnumerable<ProductResponse>> GetAllProducts();
+    Task<List<ProductResponse>> GetAllProducts();
 
     Task<Product> GetProductById(string productId);
 
-    Task<bool> UpdateProduct(Product productDetails);
+    Task<bool> UpdateProduct(ProductUpdateReq productDetails);
 
-    Task<bool> DeleteProduct(int productId);
+    Task<bool> DeleteProduct(Key productId);
 }
 
