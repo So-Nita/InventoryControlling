@@ -52,6 +52,7 @@ public class ProductService : IProductService
             Price = req.Price,
             SellPrice = req.SellPrice,
             Description = req.Description,
+            CategoryId = req.CategoryId,
             CreatedAt = DateTime.Now,
             IsDeleted = false,
         };
@@ -68,20 +69,21 @@ public class ProductService : IProductService
         }
     }
 
-    public Task<Product> GetProductById(string productId)
+    public Task<Product> GetProductById(Key key)
     {
-        var product = _unitOfWork.GetRepository<Product>().GetById(productId).Result;
-        if (product == null) throw new Exception("Product does not existing.");
+        var product = _unitOfWork.GetRepository<Product>().GetById(key.Id).Result;
+        if (product == null) throw new SecurityTokenException("Product does not existing.");
         return Task.FromResult(product);
     }
 
     
     public Task<bool> UpdateProduct(ProductUpdateReq req)
     {
-        if(req.Id.IsNullOrEmpty() || req.Code.IsNullOrEmpty()) throw new SecurityTokenException("Product identify is required");
-        var product = _unitOfWork.GetRepository<Product>().GetQueryable().FirstOrDefault(e=>e.Id==req.Id||e.Code==req.Code);
+        if(req.Id.IsNullOrEmpty()) throw new SecurityTokenException("Product identify is required");
+        var product = _unitOfWork.GetRepository<Product>().GetQueryable().FirstOrDefault(e=>e.Id==req.Id);
+        
         if(req.Price > req.SellPrice) throw new SecurityTokenException("Price must be less than Sell Price");
-        if (product == null) throw new Exception("Product does not existing.");
+        if (product == null) throw new SecurityTokenException("Product does not existing.");
         product.Name = req.Name;
         product.Price = req.Price;
         product.SellPrice = req.SellPrice;
@@ -89,7 +91,7 @@ public class ProductService : IProductService
         try
         {
             _unitOfWork.GetRepository<Product>().Update(product);
-            _unitOfWork.CommitTransaction();
+            _unitOfWork.Save();
             return Task.FromResult(true);
         }
         catch (Exception e)
@@ -102,11 +104,11 @@ public class ProductService : IProductService
     public Task<bool> DeleteProduct(Key key)
     {
         var product = _unitOfWork.GetRepository<Product>().GetQueryable().FirstOrDefault(e=> e.Code==key.Code || e.Id==key.Id);
-        if (product == null) throw new Exception("Product does not existing.");
+        if (product == null) throw new SecurityTokenException("Product does not existing.");
         try
         {
             _unitOfWork.GetRepository<Product>().Delete(product);
-            _unitOfWork.CommitTransaction();
+            _unitOfWork.Save();
             return Task.FromResult(true);
         }
         catch (Exception e)

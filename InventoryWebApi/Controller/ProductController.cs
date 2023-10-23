@@ -26,7 +26,7 @@ public class ProductController : ControllerBase
     {
         try
         {
-            var product = _service.GetProductById(key.Id);
+            var product = _service.GetProductById(key);
             return Ok(product);
         }
         catch (Exception e)

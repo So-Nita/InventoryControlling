@@ -11,7 +11,7 @@ public interface IProductService
 
     Task<List<ProductResponse>> GetAllProducts();
 
-    Task<Product> GetProductById(string productId);
+    Task<Product> GetProductById(Key key);
 
     Task<bool> UpdateProduct(ProductUpdateReq productDetails);
 

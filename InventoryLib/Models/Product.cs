@@ -7,10 +7,10 @@ public class Product
     public string Name { get; set; } = "";
     public decimal Price { get; set; }
     public decimal SellPrice { get; set; }
-    public string CategoryId { get; set; } 
+    public string CategoryId { get; set; } = null!;
     public string? Description { get; set; }
     public DateTime CreatedAt { get; set; }
     public bool? IsDeleted { get; set; }
-    
-    public Category Category { get; set; } 
+
+    public Category Category { get; set; } = null!;
 }
