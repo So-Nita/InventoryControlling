@@ -1,6 +1,8 @@
+using InventoryLib.Services;
+
 namespace InventoryLib.Models.Response.Product;
 
-public class ProductResponse
+public class ProductResponse : IReadReq
 {
     public string Id { get; set; } = null!;
     public string Code { get; set; } = null!;

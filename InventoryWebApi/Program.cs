@@ -18,6 +18,7 @@ builder.Services.AddDbContext<InventoryContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 },ServiceLifetime.Transient);
+
 builder.Services.AddScoped<InventoryLib.Interface.IProductService,InventoryLib.Services.ProductService>();
 builder.Services.AddScoped<InventoryLib.Interface.IRepository<Product>,InventoryLib.Repository.Repository<Product>>();
 builder.Services.AddScoped<InventoryLib.Interface.IUnitOfWork,InventoryLib.UnitOfWork.UnitOfWork>();

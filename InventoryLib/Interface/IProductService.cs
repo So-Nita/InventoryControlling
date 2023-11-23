@@ -5,16 +5,16 @@ using InventoryLib.Services;
 
 namespace InventoryLib.Interface;
 
-public interface IProductService
+public interface IProductService : IService<ProductResponse,ProductCreateReq,ProductUpdateReq>
 {
-    Task<Product> CreateProduct(ProductCreateReq productDetails);
+    //Task<Product> CreateProduct(ProductCreateReq productDetails);
 
-    Task<List<ProductResponse>> GetAllProducts();
+    //Task<List<ProductResponse>> GetAllProducts();
 
-    Task<Product> GetProductById(Key key);
+    //Task<Product> GetProductById(Key key);
 
-    Task<bool> UpdateProduct(ProductUpdateReq productDetails);
+    //Task<bool> UpdateProduct(ProductUpdateReq productDetails);
 
-    Task<bool> DeleteProduct(Key productId);
+    //Task<bool> DeleteProduct(Key productId);
 }
 

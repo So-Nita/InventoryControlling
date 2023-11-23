@@ -1,6 +1,8 @@
+using InventoryLib.Services;
+
 namespace InventoryLib.Models.Request.Product;
 
-public class ProductCreateReq
+public class ProductCreateReq : ICreateReq
 {
     public string Code { get; set; } = "";
     public string Name { get; set; } = "";

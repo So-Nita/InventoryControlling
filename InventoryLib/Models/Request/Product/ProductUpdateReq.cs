@@ -1,6 +1,8 @@
+using InventoryLib.Services;
+
 namespace InventoryLib.Models.Request.Product;
 
-public class ProductUpdateReq
+public class ProductUpdateReq : IUpdateReq
 {
     public string Id { get; set; } = "";
     //public string Code { get; set; } = "";

@@ -1,0 +1,40 @@
+﻿<Properties StartupConfiguration="{BDDE06FE-BFC6-49BF-8886-A11CC920F4A1}|https">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="InventoryLib/UnitOfWork/UnitOfWork.cs">
+    <Files>
+      <File FileName="InventoryWebApi/Program.cs" />
+      <File FileName="InventoryLib/DataResponse/Response.cs" Line="12" Column="1" />
+      <File FileName="InventoryLib/Repository/Repository.cs" Line="39" Column="6" />
+      <File FileName="../../../../../Downloads/ExpenseApi/ExpenseApi/Contracts/IService.cs" Line="5" Column="25" />
+      <File FileName="../../../../../Downloads/ExpenseApi/ExpenseApi/Repos/ExpenseService.cs" Line="5" Column="46" />
+      <File FileName="InventoryLib/Services/ProductService.cs" Line="169" Column="52" />
+      <File FileName="../../../../../Downloads/ExpenseApi/ExpenseApi/Contracts/IExpenseService.cs" Line="1" Column="1" />
+      <File FileName="InventoryLib/Models/Request/Product/ProductUpdateReq.cs" Line="5" Column="14" />
+      <File FileName="InventoryLib/Models/Response/Product/ProductResponse.cs" Line="5" Column="14" />
+      <File FileName="InventoryLib/Interface/IRepository.cs" Line="12" Column="10" />
+      <File FileName="InventoryLib/UnitOfWork/UnitOfWork.cs" Line="38" Column="38" />
+      <File FileName="../../../../../Downloads/ExpenseApi/ExpenseApi/Repos/ExpenseRepo.cs" Line="19" Column="33" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="InventoryControlling" selected="True">
+            <Node name="InventoryConsole" expanded="True" />
+            <Node name="InventoryLib">
+              <Node name="UnitOfWork" expanded="True" />
+            </Node>
+            <Node name="InventoryWebApi" expanded="True">
+              <Node name="Dependencies" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.InventoryWebApi PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+</Properties>

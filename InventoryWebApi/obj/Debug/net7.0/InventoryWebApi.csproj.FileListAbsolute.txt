@@ -106,3 +106,7 @@
 /Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryWebApi/bin/Debug/net7.0/runtimes/win/lib/net6.0/System.Windows.Extensions.dll
 /Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryWebApi/bin/Debug/net7.0/InventoryLib.dll
 /Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryWebApi/bin/Debug/net7.0/InventoryLib.pdb
+/Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryWebApi/bin/Debug/net7.0/System.Net.Http.Formatting.dll
+/Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryWebApi/bin/Debug/net7.0/System.Web.Http.dll
+/Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryWebApi/bin/Debug/net7.0/Newtonsoft.Json.dll
+/Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryWebApi/bin/Debug/net7.0/Newtonsoft.Json.Bson.dll

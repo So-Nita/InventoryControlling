@@ -1,6 +1,4 @@
-
 using InventoryLib.Interface;
-using InventoryLib.Models;
 using InventoryLib.Models.Request.Product;
 using Microsoft.AspNetCore.Mvc;
 

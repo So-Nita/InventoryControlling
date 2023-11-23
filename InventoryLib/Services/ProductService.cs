@@ -71,7 +71,7 @@ public class ProductService : IProductService
 
     public Task<Product> GetProductById(Key key)
     {
-        var product = _unitOfWork.GetRepository<Product>().GetById(key.Id).Result;
+        var product = _unitOfWork.GetRepository<Product>().GetById(key.Id!).Result;
         if (product == null) throw new SecurityTokenException("Product does not existing.");
         return Task.FromResult(product);
     }
@@ -116,6 +116,67 @@ public class ProductService : IProductService
             Console.WriteLine(e);
             return Task.FromResult(false);
         }
+    }
+
+    public string? Create(ProductCreateReq req)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<ProductResponse> ReadAll()
+    {
+        var products = _unitOfWork.GetRepository<Product>()
+            .GetQueryable()
+            .Include(e => e.Category)
+            .Select(e => new ProductResponse()
+            {
+                Id = e.Id,
+                Code = e.Code,
+                Name = e.Name,
+                Price = e.Price,
+                SellPrice = e.SellPrice,
+                Description = e.Description!,
+                CreatedAt = e.CreatedAt,
+                CategoryId = e.CategoryId,
+                CategoryName = e.Category.Name
+            }).ToListAsync();
+        return products.Result;
+    }
+
+    public ProductResponse? Read(string key)
+    {
+        var product = _unitOfWork.GetRepository<Product>().GetById(key).Result;
+        if (product == null) throw new SecurityTokenException("Product does not existing.");
+        var result = new ProductResponse()
+        {
+            Id = product.Id,
+            Code = product.Code,
+            Price = product.Price,
+            SellPrice = product.SellPrice,
+            Description = product.Description,
+            CreatedAt = product.CreatedAt,
+            CategoryName = product.CategoryId,
+        };
+        return result;
+    }
+
+    public string? Update(ProductUpdateReq req)
+    {
+        var product = _unitOfWork.GetRepository<Product>().GetById(req.Id).Result;
+        if (product == null) throw new ArgumentException("Product does not existing");
+        try
+        {
+            _unitOfWork.GetRepository<Product>().Update(product);
+
+        }catch(Exception ec)
+        {
+
+        }
+    }
+
+    public string? Delete(string key)
+    {
+        throw new NotImplementedException();
     }
 }
 

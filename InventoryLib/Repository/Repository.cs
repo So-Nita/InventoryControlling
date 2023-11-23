@@ -8,6 +8,7 @@ namespace InventoryLib.Repository;
 public class Repository<TE> : IRepository<TE> where TE : class
 {
     private readonly InventoryContext _context;
+
     public Repository(InventoryContext context)
     {
         _context = context;
@@ -36,6 +37,15 @@ public class Repository<TE> : IRepository<TE> where TE : class
     {
         _context.Set<TE>().Remove(entity);
     }
+    public void SaveChanges()
+    {
+        try
+        {
+            _context.SaveChanges();
+        }
+        catch { throw new ArgumentException(); }
+    }
+
 }
 
 
