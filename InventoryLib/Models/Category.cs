@@ -7,5 +7,6 @@ public class Category
     public string? Description { get; set; }
     public DateTime? CreatedAt { get; set; }
     public bool? IsDeleted { get; set; }
-    public ICollection<Product> Products { get; set; } = new List<Product>();
+
+    public ICollection<Product>? Products { get; set; } = default;
 }

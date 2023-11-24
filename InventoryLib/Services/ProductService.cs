@@ -27,7 +27,7 @@ public class ProductService : IProductService
                 Code = e.Code,
                 Name = e.Name,
                 Price = e.Price,
-                SellPrice = e.SellPrice,
+                Cost = e.Cost,
                 Description = e.Description!,
                 CreatedAt = e.CreatedAt,
                 CategoryId = e.CategoryId,
@@ -50,7 +50,7 @@ public class ProductService : IProductService
             Code = req.Code,
             Name = req.Name,
             Price = req.Price,
-            SellPrice = req.SellPrice,
+            Cost = req.SellPrice,
             Description = req.Description,
             CategoryId = req.CategoryId,
             CreatedAt = DateTime.Now,
@@ -82,11 +82,11 @@ public class ProductService : IProductService
         if(req.Id.IsNullOrEmpty()) throw new SecurityTokenException("Product identify is required");
         var product = _unitOfWork.GetRepository<Product>().GetQueryable().FirstOrDefault(e=>e.Id==req.Id);
         
-        if(req.Price > req.SellPrice) throw new SecurityTokenException("Price must be less than Sell Price");
+        if(req.Price > req.Price) throw new SecurityTokenException("Price must be less than Sell Price");
         if (product == null) throw new SecurityTokenException("Product does not existing.");
         product.Name = req.Name;
         product.Price = req.Price;
-        product.SellPrice = req.SellPrice;
+        product.Cost = req.SellPrice;
         product.Description = req.Description;
         try
         {
@@ -167,10 +167,11 @@ public class ProductService : IProductService
         try
         {
             _unitOfWork.GetRepository<Product>().Update(product);
-
+            _unitOfWork.Save();
+            return product.Id;
         }catch(Exception ec)
         {
-
+            return null;
         }
     }
 

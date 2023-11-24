@@ -110,3 +110,13 @@
 /Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryWebApi/bin/Debug/net7.0/System.Web.Http.dll
 /Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryWebApi/bin/Debug/net7.0/Newtonsoft.Json.dll
 /Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryWebApi/bin/Debug/net7.0/Newtonsoft.Json.Bson.dll
+D:\MyFolder\MyProject\InventoryControlling\InventoryWebApi\obj\Debug\net7.0\InventoryWebApi.csproj.AssemblyReference.cache
+D:\MyFolder\MyProject\InventoryControlling\InventoryWebApi\obj\Debug\net7.0\InventoryWebApi.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyFolder\MyProject\InventoryControlling\InventoryWebApi\obj\Debug\net7.0\InventoryWebApi.AssemblyInfoInputs.cache
+D:\MyFolder\MyProject\InventoryControlling\InventoryWebApi\obj\Debug\net7.0\InventoryWebApi.AssemblyInfo.cs
+D:\MyFolder\MyProject\InventoryControlling\InventoryWebApi\obj\Debug\net7.0\InventoryWebApi.csproj.CoreCompileInputs.cache
+D:\MyFolder\MyProject\InventoryControlling\InventoryWebApi\obj\Debug\net7.0\InventoryWebApi.MvcApplicationPartsAssemblyInfo.cs
+D:\MyFolder\MyProject\InventoryControlling\InventoryWebApi\obj\Debug\net7.0\InventoryWebApi.MvcApplicationPartsAssemblyInfo.cache
+D:\MyFolder\MyProject\InventoryControlling\InventoryWebApi\obj\Debug\net7.0\InventoryWebApi.dll
+D:\MyFolder\MyProject\InventoryControlling\InventoryWebApi\obj\Debug\net7.0\refint\InventoryWebApi.dll
+D:\MyFolder\MyProject\InventoryControlling\InventoryWebApi\obj\Debug\net7.0\InventoryWebApi.pdb

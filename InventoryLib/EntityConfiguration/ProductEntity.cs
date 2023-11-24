@@ -16,14 +16,14 @@ public class ProductEntity : IEntityTypeConfiguration<Product>
         builder.Property(e => e.Name).IsRequired().HasColumnType("varchar").HasMaxLength(50);
         builder.Property(e => e.Description).IsRequired(false).HasColumnType("varchar").HasMaxLength(100).IsUnicode();
         builder.Property(e => e.Price).IsRequired().HasColumnType("decimal(8,2)");
-        builder.Property(e => e.SellPrice).IsRequired().HasColumnType("decimal(8,2)");
+        builder.Property(e => e.Cost).IsRequired().HasColumnType("decimal(8,2)");
         builder.Property(e => e.CategoryId).IsRequired().HasColumnType("varchar").HasMaxLength(36);
         builder.Property(e => e.CreatedAt).IsRequired().HasColumnType("datetime");
         builder.Property(e => e.IsDeleted).IsRequired(false).HasColumnType("bit");
-        
-        builder.HasOne(e => e.Category)
-            .WithMany(category => category.Products)
-            .HasForeignKey(e => e.CategoryId)
-            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(x => x.Category)
+            .WithMany(p => p.Products)
+            .HasForeignKey(x => x.CategoryId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

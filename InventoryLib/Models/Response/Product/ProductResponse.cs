@@ -8,7 +8,7 @@ public class ProductResponse : IReadReq
     public string Code { get; set; } = null!;
     public string Name { get; set; } = null!;
     public decimal Price { get; set; }
-    public decimal SellPrice { get; set; }
+    public decimal Cost { get; set; }
     public string? Description { get; set; } = null!;
     public DateTime CreatedAt { get; set; }
     public string CategoryId { get; set; }= null!;

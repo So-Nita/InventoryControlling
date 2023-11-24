@@ -666,6 +666,19 @@
           }
         }
       },
+      "MySqlConnector/2.2.5": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/MySqlConnector.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/MySqlConnector.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
@@ -692,6 +705,23 @@
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {
             "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Pomelo.EntityFrameworkCore.MySql/7.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.2",
+          "MySqlConnector": "2.2.5"
+        },
+        "compile": {
+          "lib/net7.0/Pomelo.EntityFrameworkCore.MySql.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/Pomelo.EntityFrameworkCore.MySql.dll": {
+            "related": ".xml"
           }
         }
       },
@@ -1167,6 +1197,7 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Microsoft.EntityFrameworkCore": "7.0.13",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.13",
+          "Pomelo.EntityFrameworkCore.MySql": "7.0.0",
           "automapper": "12.0.1"
         },
         "compile": {
@@ -2333,6 +2364,33 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "MySqlConnector/2.2.5": {
+      "sha512": "6sinY78RvryhHwpup3awdjYO7d5hhWahb5p/1VDODJhSxJggV/sBbYuKK5IQF9TuzXABiddqUbmRfM884tqA3Q==",
+      "type": "package",
+      "path": "mysqlconnector/2.2.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net461/MySqlConnector.dll",
+        "lib/net461/MySqlConnector.xml",
+        "lib/net471/MySqlConnector.dll",
+        "lib/net471/MySqlConnector.xml",
+        "lib/net6.0/MySqlConnector.dll",
+        "lib/net6.0/MySqlConnector.xml",
+        "lib/net7.0/MySqlConnector.dll",
+        "lib/net7.0/MySqlConnector.xml",
+        "lib/netcoreapp3.1/MySqlConnector.dll",
+        "lib/netcoreapp3.1/MySqlConnector.xml",
+        "lib/netstandard2.0/MySqlConnector.dll",
+        "lib/netstandard2.0/MySqlConnector.xml",
+        "lib/netstandard2.1/MySqlConnector.dll",
+        "lib/netstandard2.1/MySqlConnector.xml",
+        "logo.png",
+        "mysqlconnector.2.2.5.nupkg.sha512",
+        "mysqlconnector.nuspec"
+      ]
+    },
     "Newtonsoft.Json/13.0.1": {
       "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "type": "package",
@@ -2379,6 +2437,23 @@
         "lib/netstandard2.0/Newtonsoft.Json.Bson.xml",
         "newtonsoft.json.bson.1.0.2.nupkg.sha512",
         "newtonsoft.json.bson.nuspec"
+      ]
+    },
+    "Pomelo.EntityFrameworkCore.MySql/7.0.0": {
+      "sha512": "Qk5WB/skSZet5Yrz6AN2ywjZaB1pxfAmvQ+5I4khTkLwwIamI4QJoH2NphCWLFQL+2ar8HvsNCTmwYk0qhqL0w==",
+      "type": "package",
+      "path": "pomelo.entityframeworkcore.mysql/7.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net6.0/Pomelo.EntityFrameworkCore.MySql.dll",
+        "lib/net6.0/Pomelo.EntityFrameworkCore.MySql.xml",
+        "lib/net7.0/Pomelo.EntityFrameworkCore.MySql.dll",
+        "lib/net7.0/Pomelo.EntityFrameworkCore.MySql.xml",
+        "pomelo.entityframeworkcore.mysql.7.0.0.nupkg.sha512",
+        "pomelo.entityframeworkcore.mysql.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore/6.5.0": {
@@ -3299,36 +3374,39 @@
       "InventoryLib >= 1.0.0",
       "Microsoft.AspNet.WebApi.Core >= 5.3.0",
       "Microsoft.AspNetCore.OpenApi >= 7.0.13",
+      "Pomelo.EntityFrameworkCore.MySql >= 7.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
   "packageFolders": {
-    "/Users/borinsonita/.nuget/packages/": {}
+    "C:\\Users\\back-end.07\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryWebApi/InventoryWebApi.csproj",
+      "projectUniqueName": "D:\\MyFolder\\MyProject\\InventoryControlling\\InventoryWebApi\\InventoryWebApi.csproj",
       "projectName": "InventoryWebApi",
-      "projectPath": "/Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryWebApi/InventoryWebApi.csproj",
-      "packagesPath": "/Users/borinsonita/.nuget/packages/",
-      "outputPath": "/Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryWebApi/obj/",
+      "projectPath": "D:\\MyFolder\\MyProject\\InventoryControlling\\InventoryWebApi\\InventoryWebApi.csproj",
+      "packagesPath": "C:\\Users\\back-end.07\\.nuget\\packages\\",
+      "outputPath": "D:\\MyFolder\\MyProject\\InventoryControlling\\InventoryWebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/borinsonita/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\back-end.07\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryLib/InventoryLib.csproj": {
-              "projectPath": "/Users/borinsonita/Personal/RUPP/OOAD/Assignment/InventoryControlling/InventoryLib/InventoryLib.csproj"
+            "D:\\MyFolder\\MyProject\\InventoryControlling\\InventoryLib\\InventoryLib.csproj": {
+              "projectPath": "D:\\MyFolder\\MyProject\\InventoryControlling\\InventoryLib\\InventoryLib.csproj"
             }
           }
         }
@@ -3350,6 +3428,10 @@
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[7.0.13, )"
+          },
+          "Pomelo.EntityFrameworkCore.MySql": {
+            "target": "Package",
+            "version": "[7.0.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
@@ -3375,7 +3457,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   },

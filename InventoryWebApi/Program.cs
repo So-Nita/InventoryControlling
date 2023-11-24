@@ -14,10 +14,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<InventoryContext>(opt =>
+/*builder.Services.AddDbContext<InventoryContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-},ServiceLifetime.Transient);
+},ServiceLifetime.Transient);*/
+
+var connectionStrings = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<InventoryContext>(opt =>
+{
+    opt.UseMySql(connectionStrings, ServerVersion.AutoDetect(connectionStrings));
+}, ServiceLifetime.Transient);
+
 
 builder.Services.AddScoped<InventoryLib.Interface.IProductService,InventoryLib.Services.ProductService>();
 builder.Services.AddScoped<InventoryLib.Interface.IRepository<Product>,InventoryLib.Repository.Repository<Product>>();
