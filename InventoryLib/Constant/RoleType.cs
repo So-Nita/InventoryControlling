@@ -8,7 +8,7 @@ namespace InventoryLib.Constant
 {
     public enum RoleType
     {
-        Admin,
-        Seller
+        Admin=1,
+        Seller=2
     }
 }

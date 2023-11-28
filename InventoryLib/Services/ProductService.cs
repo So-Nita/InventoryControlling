@@ -1,8 +1,12 @@
 using System.Collections;
+using InventoryLib.DataResponse;
 using InventoryLib.Interface;
 using InventoryLib.Models;
+using InventoryLib.Models.Request.PriceHistory;
 using InventoryLib.Models.Request.Product;
+using InventoryLib.Models.Response;
 using InventoryLib.Models.Response.Product;
+using InventoryLib.Validation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -16,41 +20,31 @@ public class ProductService : IProductService
     {
         _unitOfWork = unitOfWork;
     }
-    public Task<List<ProductResponse>> GetAllProducts()
-    {
-        var products = _unitOfWork.GetRepository<Product>()
-            .GetQueryable()
-            .Include(e => e.Category)
-            .Select(e => new ProductResponse()
-            {
-                Id = e.Id,
-                Code = e.Code,
-                Name = e.Name,
-                Price = e.Price,
-                Cost = e.Cost,
-                Description = e.Description!,
-                CreatedAt = e.CreatedAt,
-                CategoryId = e.CategoryId,
-                CategoryName = e.Category.Name
-            }).ToListAsync();
-        return Task.FromResult(products.Result);
-    }
     
-    public Task<Product> CreateProduct(ProductCreateReq req)
+    public Response<string> Create(ProductCreateReq req)
     {
-        if(req.Code.IsNullOrEmpty()) throw new SecurityTokenException("Code is required");
-        if (req.Name.IsNullOrEmpty()) throw new SecurityTokenException("Name is required");
-        if (req.Price == 0) throw new SecurityTokenException("Price is required");
-        if(req.Price > req.SellPrice) throw new SecurityTokenException("Price must be less than Sell Price");
-        var existPro = GetAllProducts().Result.FirstOrDefault(e=>e.Code==req.Code);
-        if(existPro != null) throw new SecurityTokenException("Product code is existing.");
+        var validationErrors = DataValidation<ProductCreateReq>.ValidateDynamicTypes(req);
+        if (validationErrors.Count > 0)
+        {
+            return Response<string>.Fail(data: validationErrors.First().ToString());
+        }
+        var existPro = ReadAll().Result!.FirstOrDefault(e => e.Code == req.Code);
+        if (existPro != null)
+        {
+            return Response<string>.Conflict("Product's Code is existing.");
+        }
+        if (req.Price < req.Cost)
+        {
+            return Response<string>.Fail("Price must be more than Cost.");
+        }
         var product = new Product()
         {
             Id = Guid.NewGuid().ToString(),
             Code = req.Code,
             Name = req.Name,
             Price = req.Price,
-            Cost = req.SellPrice,
+            Cost = req.Cost,
+            Image = req.Image,
             Description = req.Description,
             CategoryId = req.CategoryId,
             CreatedAt = DateTime.Now,
@@ -60,73 +54,21 @@ public class ProductService : IProductService
         {
             _unitOfWork.GetRepository<Product>().Add(product);
             _unitOfWork.Save();
-            return Task.FromResult(product);
+            return Response<string>.Success("Product Create Successfully.");
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            return Task.FromResult<Product>(null!);
+            return Response<string>.Fail("Failed Create Product.");
         }
     }
 
-    public Task<Product> GetProductById(Key key)
+    public Response<List<ProductResponse>> ReadAll()
     {
-        var product = _unitOfWork.GetRepository<Product>().GetById(key.Id!).Result;
-        if (product == null) throw new SecurityTokenException("Product does not existing.");
-        return Task.FromResult(product);
-    }
-
-    
-    public Task<bool> UpdateProduct(ProductUpdateReq req)
-    {
-        if(req.Id.IsNullOrEmpty()) throw new SecurityTokenException("Product identify is required");
-        var product = _unitOfWork.GetRepository<Product>().GetQueryable().FirstOrDefault(e=>e.Id==req.Id);
-        
-        if(req.Price > req.Price) throw new SecurityTokenException("Price must be less than Sell Price");
-        if (product == null) throw new SecurityTokenException("Product does not existing.");
-        product.Name = req.Name;
-        product.Price = req.Price;
-        product.Cost = req.SellPrice;
-        product.Description = req.Description;
         try
         {
-            _unitOfWork.GetRepository<Product>().Update(product);
-            _unitOfWork.Save();
-            return Task.FromResult(true);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return Task.FromResult(false);
-        }
-    }
-
-    public Task<bool> DeleteProduct(Key key)
-    {
-        var product = _unitOfWork.GetRepository<Product>().GetQueryable().FirstOrDefault(e=> e.Code==key.Code || e.Id==key.Id);
-        if (product == null) throw new SecurityTokenException("Product does not existing.");
-        try
-        {
-            _unitOfWork.GetRepository<Product>().Delete(product);
-            _unitOfWork.Save();
-            return Task.FromResult(true);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return Task.FromResult(false);
-        }
-    }
-
-    public string? Create(ProductCreateReq req)
-    {
-        throw new NotImplementedException();
-    }
-
-    public List<ProductResponse> ReadAll()
-    {
-        var products = _unitOfWork.GetRepository<Product>()
-            .GetQueryable()
+            var products = _unitOfWork.GetRepository<Product>()
+            .GetQueryable().Where(e => e.IsDeleted == false)
             .Include(e => e.Category)
             .Select(e => new ProductResponse()
             {
@@ -134,50 +76,116 @@ public class ProductService : IProductService
                 Code = e.Code,
                 Name = e.Name,
                 Price = e.Price,
-                SellPrice = e.SellPrice,
+                Cost = e.Cost,
+                Image = e.Image,
                 Description = e.Description!,
                 CreatedAt = e.CreatedAt,
                 CategoryId = e.CategoryId,
                 CategoryName = e.Category.Name
-            }).ToListAsync();
-        return products.Result;
-    }
-
-    public ProductResponse? Read(string key)
-    {
-        var product = _unitOfWork.GetRepository<Product>().GetById(key).Result;
-        if (product == null) throw new SecurityTokenException("Product does not existing.");
-        var result = new ProductResponse()
+            }).ToList();
+            return Response<List<ProductResponse>>.Success(products,products.Count());
+        }
+        catch(ArgumentException ex)
         {
-            Id = product.Id,
-            Code = product.Code,
-            Price = product.Price,
-            SellPrice = product.SellPrice,
-            Description = product.Description,
-            CreatedAt = product.CreatedAt,
-            CategoryName = product.CategoryId,
-        };
-        return result;
-    }
-
-    public string? Update(ProductUpdateReq req)
-    {
-        var product = _unitOfWork.GetRepository<Product>().GetById(req.Id).Result;
-        if (product == null) throw new ArgumentException("Product does not existing");
-        try
-        {
-            _unitOfWork.GetRepository<Product>().Update(product);
-            _unitOfWork.Save();
-            return product.Id;
-        }catch(Exception ec)
-        {
-            return null;
+            return Response<List<ProductResponse>>.Fail();
         }
     }
 
-    public string? Delete(string key)
+    public Response<ProductResponse?> Read(Key key)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var product = _unitOfWork.GetRepository<Product>().GetQueryable()
+                .Where(e=>e.Id==key.Id || e.Code==key.Code).Include(e =>e.Category)
+                .Select(e=> new ProductResponse()
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    Code = e.Code,
+                    Price = e.Price,
+                    Cost = e.Cost,
+                    Image = e.Image,
+                    CategoryId = e.CategoryId,
+                    CategoryName = e.Category.Name
+                }).First();
+            
+            return Response<ProductResponse>.Success(product)!;
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex);
+            return null!;
+        }
+    }
+
+    public Response<string> Update(ProductUpdateReq req)
+    {
+        if (req.Id==null)
+        {
+            return Response<string>.Fail("Field Id is required.");
+        }
+        var productFound = _unitOfWork.GetRepository<Product>().GetQueryable().Where(e=>e.IsDeleted==false)
+                            .FirstOrDefault(e => e.Id == req.Id || e.Code==req.Code );
+        if (productFound == null)
+        {
+            return Response<string>.NotFound("Product does not existing.");
+        }
+        if (req.Price < req.Cost)
+        {
+            return Response<string>.Fail("Price must be more than Cost.");
+        }
+        
+        productFound!.Name = req.Name ?? productFound.Name;
+        productFound.Price = (decimal)(req.Price ?? productFound.Price);
+        productFound.Cost = (decimal)(req.Cost ?? productFound.Cost);
+        productFound.Image = req.Image! ?? productFound.Image;
+        productFound.Description = req.Description ?? productFound.Description;
+
+        if (productFound.Price != req.Price)
+        {
+            if (req.Price > productFound.Cost) { return Response<string>.Fail($"Price must be more than Cost is {productFound.Cost}"); }
+
+            var priceHistory = new PriceHistoryCreateReq()
+            {
+                ProductId = productFound.Id,
+                OldPrice = productFound.Price,
+                CurrentPrice = (decimal)req.Price!
+            };
+            PriceHistoryService.Create(_unitOfWork, priceHistory);
+        }
+        try
+        {
+            _unitOfWork.GetRepository<Product>().Update(productFound);
+            _unitOfWork.Save();
+            return Response<string>.Success("Updated Successfully");
+        }
+        catch (Exception e)
+        {
+            _unitOfWork.RollBackTransaction();
+            return Response<string>.Fail("Failed to update product.");
+        }
+    }
+
+    public Response<string> Delete(string key)
+    {
+        if (key == null)
+        {
+            return Response<string>.Fail("Product id is required.");
+        }
+        var product = _unitOfWork.GetRepository<Product>().GetQueryable().FirstOrDefault(e => e.Id==key);
+        if (product == null) return Response<string>.NotFound("Product does not existing.");
+        try
+        {
+            product.IsDeleted = true;
+            _unitOfWork.GetRepository<Product>().Update(product);
+            _unitOfWork.Save();
+            return Response<string>.Success("Deleted Successfully");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return Response<string>.Fail("Failed to delete product.");
+        }
     }
 }
 

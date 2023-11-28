@@ -1,6 +1,9 @@
 using InventoryLib.DataConfiguration;
 using InventoryLib.Interface;
+using InventoryLib.Interface.IService;
 using InventoryLib.Models;
+using InventoryLib.Models.Response;
+using InventoryLib.Models.Response.User;
 using InventoryLib.Repository;
 using InventoryLib.Services;
 using InventoryLib.UnitOfWork;
@@ -14,6 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// SQL Server 
 /*builder.Services.AddDbContext<InventoryContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -25,10 +29,16 @@ builder.Services.AddDbContext<InventoryContext>(opt =>
     opt.UseMySql(connectionStrings, ServerVersion.AutoDetect(connectionStrings));
 }, ServiceLifetime.Transient);
 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
-builder.Services.AddScoped<InventoryLib.Interface.IProductService,InventoryLib.Services.ProductService>();
-builder.Services.AddScoped<InventoryLib.Interface.IRepository<Product>,InventoryLib.Repository.Repository<Product>>();
-builder.Services.AddScoped<InventoryLib.Interface.IUnitOfWork,InventoryLib.UnitOfWork.UnitOfWork>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IUserService<UserResponse>, UserService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IPriceHistoryService<PriceHistoryResponse>, PriceHistoryService>();
+builder.Services.AddScoped<IStockingService, StockingService>();
+
 
 var app = builder.Build();
 

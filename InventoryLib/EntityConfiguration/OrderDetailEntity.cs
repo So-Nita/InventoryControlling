@@ -28,7 +28,7 @@ namespace InventoryLib.EntityConfiguration
 
             builder.HasOne(x => x.Order)
                 .WithMany(p => p.OrderDetails)
-                .HasForeignKey(x => x.ProductId)
+                .HasForeignKey(x => x.OrderId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

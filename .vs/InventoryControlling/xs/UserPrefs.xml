@@ -1,0 +1,56 @@
+﻿<Properties StartupConfiguration="{BDDE06FE-BFC6-49BF-8886-A11CC920F4A1}|https">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../Downloads/BankAccount_API_Demo2X/BankAccount.Transactions/CreateTransaction.cs">
+    <Files>
+      <File FileName="InventoryWebApi/Program.cs" Line="40" Column="51" IsPinned="True" />
+      <File FileName="InventoryLib/Services/StockingService.cs" Line="57" Column="23" />
+      <File FileName="../../../../Downloads/BankAccount_API_Demo2X/BankAccount.Transactions/CreateTransaction.cs" Line="5" Column="56" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="InventoryControlling" expanded="True">
+            <Node name="InventoryLib">
+              <Node name="Models" expanded="True">
+                <Node name="Request" expanded="True" />
+                <Node name="Response" expanded="True">
+                  <Node name="OrderDetail" expanded="True" />
+                  <Node name="PriceHistory" expanded="True" />
+                  <Node name="User" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Services" expanded="True">
+                <Node name="StockingService.cs" selected="True" />
+              </Node>
+              <Node name="UnitOfWork" expanded="True" />
+              <Node name="Validation" expanded="True" />
+            </Node>
+            <Node name="InventoryWebApi">
+              <Node name="Controller" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/Services/ProductService.cs" relfile="InventoryLib/Services/ProductService.cs" line="36" column="1" />
+      <Breakpoint file="/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryWebApi/Controller/ProductController.cs" relfile="InventoryWebApi/Controller/ProductController.cs" line="52" column="1" />
+      <Breakpoint file="/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/Services/ProductService.cs" relfile="InventoryLib/Services/ProductService.cs" line="55" column="1" />
+      <Breakpoint file="/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/Services/ProductService.cs" relfile="InventoryLib/Services/ProductService.cs" line="129" column="1" />
+      <Breakpoint file="/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/Services/CategoryService.cs" relfile="InventoryLib/Services/CategoryService.cs" line="80" column="1" />
+      <Breakpoint file="/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/Services/CategoryService.cs" relfile="InventoryLib/Services/CategoryService.cs" line="92" column="1" />
+      <Breakpoint file="/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/Services/UserService.cs" relfile="InventoryLib/Services/UserService.cs" line="62" column="1" />
+      <Breakpoint file="/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/Services/OrderService.cs" relfile="InventoryLib/Services/OrderService.cs" line="66" column="1" />
+      <Breakpoint file="/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/Services/PriceHistoryService.cs" relfile="InventoryLib/Services/PriceHistoryService.cs" line="31" column="1" />
+      <Breakpoint file="/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/Services/PriceHistoryService.cs" relfile="InventoryLib/Services/PriceHistoryService.cs" line="58" column="1" />
+      <Breakpoint file="/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryWebApi/Controller/PriceHistoryController.cs" relfile="InventoryWebApi/Controller/PriceHistoryController.cs" line="54" column="1" />
+      <Breakpoint file="/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/Services/ProductService.cs" relfile="InventoryLib/Services/ProductService.cs" line="162" column="1" />
+      <Breakpoint file="/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/Services/PriceHistoryService.cs" relfile="InventoryLib/Services/PriceHistoryService.cs" line="76" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.InventoryWebApi PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+</Properties>

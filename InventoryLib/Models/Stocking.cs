@@ -6,7 +6,7 @@ public class Stocking
 {
     public string Id { get; set; } = "";
     public string ProductId { get; set; } = "";
-    public StatusType ProductName { get; set; }
+    public StatusType Status { get; set; }
     public int Qty { get; set; }
     public DateTime TransactionDate { get; set; }
 

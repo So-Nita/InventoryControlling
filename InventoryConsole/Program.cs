@@ -21,7 +21,7 @@ static class Program
 
         try
         {
-            await productServiceHelper.GetAllProducts();
+            productServiceHelper.GetAllProducts();
         }
         catch (Exception e)
         {

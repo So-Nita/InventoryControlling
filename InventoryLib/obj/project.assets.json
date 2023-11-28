@@ -3021,26 +3021,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\back-end.07\\.nuget\\packages\\": {}
+    "/Users/borinsonita/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MyFolder\\MyProject\\InventoryControlling\\InventoryLib\\InventoryLib.csproj",
+      "projectUniqueName": "/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/InventoryLib.csproj",
       "projectName": "InventoryLib",
-      "projectPath": "D:\\MyFolder\\MyProject\\InventoryControlling\\InventoryLib\\InventoryLib.csproj",
-      "packagesPath": "C:\\Users\\back-end.07\\.nuget\\packages\\",
-      "outputPath": "D:\\MyFolder\\MyProject\\InventoryControlling\\InventoryLib\\obj\\",
+      "projectPath": "/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/InventoryLib.csproj",
+      "packagesPath": "/Users/borinsonita/.nuget/packages/",
+      "outputPath": "/Users/borinsonita/Personal/RUPP/OOAD/InventoryControlling/InventoryLib/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\back-end.07\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/borinsonita/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3102,7 +3100,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,3 +1,4 @@
+using InventoryLib.Constant;
 using InventoryLib.Interface;
 using InventoryLib.Models.Request.Product;
 using Microsoft.AspNetCore.Mvc;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace InventoryWebApi.Controller;
 
 [ApiController][Route("api/product")]
+
 public class ProductController : ControllerBase
 {
     private readonly IProductService _service;
@@ -16,15 +18,23 @@ public class ProductController : ControllerBase
     [HttpGet]
     public IActionResult GetAllProducts()
     {
-        var products = _service.GetAllProducts();
-        return Ok(products);
+        try
+        {
+            var products = _service.ReadAll();
+            if (products == null) { return BadRequest("Something went wrong."); }
+            return Ok(products);
+        }
+        catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
-    [HttpGet("getById")]
+    [HttpPost("getById")]
     public IActionResult GetById([FromBody] Key key)
     {
         try
         {
-            var product = _service.GetProductById(key);
+            var product = _service.Read(key);
             return Ok(product);
         }
         catch (Exception e)
@@ -39,8 +49,12 @@ public class ProductController : ControllerBase
     {
         try
         {
-            var product = _service.CreateProduct(request);   
-            return Ok("Create successfully");
+            var data = _service.Create(request);
+            if (data.Status != (int)ResponseStatusType.Success)
+            {
+                return BadRequest(data);
+            }
+            return Ok(data);
         }
         catch (Exception e)
         {
@@ -53,8 +67,12 @@ public class ProductController : ControllerBase
     {
         try
         {
-            var product = _service.UpdateProduct(request);   
-            return Ok("Update successfully");
+            var data = _service.Update(request);
+            if (data.Status != (int)ResponseStatusType.Success)
+            {
+                return BadRequest(data);
+            }
+            return Ok(data);
         }
         catch (Exception e)
         {
@@ -67,12 +85,15 @@ public class ProductController : ControllerBase
     {
         try
         {
-            var product = _service.DeleteProduct(request);   
-            return Ok("Delete successfully");
+            var product = _service.Delete(request.Id!);
+            if (product.Status != (int)ResponseStatusType.Success)
+            {
+                return BadRequest(product);
+            }
+            return Ok(product);
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
             return BadRequest(e.Message);
         }
     }

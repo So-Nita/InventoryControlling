@@ -18,6 +18,7 @@ public class ProductEntity : IEntityTypeConfiguration<Product>
         builder.Property(e => e.Price).IsRequired().HasColumnType("decimal(8,2)");
         builder.Property(e => e.Cost).IsRequired().HasColumnType("decimal(8,2)");
         builder.Property(e => e.CategoryId).IsRequired().HasColumnType("varchar").HasMaxLength(36);
+        builder.Property(e => e.Image).IsRequired().HasColumnType("nvarchar").HasMaxLength(550);
         builder.Property(e => e.CreatedAt).IsRequired().HasColumnType("datetime");
         builder.Property(e => e.IsDeleted).IsRequired(false).HasColumnType("bit");
 

@@ -20,8 +20,38 @@
 
     <ItemGroup>
       <None Remove="DataResponse\" />
+      <None Remove="Validation\" />
+      <None Remove="Models\Response\Category\" />
+      <None Remove="Models\Request\Category\" />
+      <None Remove="Interface\IModel\" />
+      <None Remove="Interface\IService\" />
+      <None Remove="Models\Response\Stocking\" />
+      <None Remove="Models\Request\Stocking\" />
+      <None Remove="Services\StockCal\" />
+      <None Remove="Models\Response\User\" />
+      <None Remove="Models\Response\Order\" />
+      <None Remove="Models\Response\OrderDetail\" />
+      <None Remove="Models\Response\PriceHistory\" />
+      <None Remove="Models\Request\Order\" />
+      <None Remove="Models\Request\OrderDetail\" />
+      <None Remove="Models\Request\PriceHistory\" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="DataResponse\" />
+      <Folder Include="Validation\" />
+      <Folder Include="Models\Response\Category\" />
+      <Folder Include="Models\Request\Category\" />
+      <Folder Include="Interface\IModel\" />
+      <Folder Include="Interface\IService\" />
+      <Folder Include="Models\Response\Stocking\" />
+      <Folder Include="Models\Request\Stocking\" />
+      <Folder Include="Services\StockCal\" />
+      <Folder Include="Models\Response\User\" />
+      <Folder Include="Models\Response\Order\" />
+      <Folder Include="Models\Response\OrderDetail\" />
+      <Folder Include="Models\Response\PriceHistory\" />
+      <Folder Include="Models\Request\Order\" />
+      <Folder Include="Models\Request\OrderDetail\" />
+      <Folder Include="Models\Request\PriceHistory\" />
     </ItemGroup>
 </Project>

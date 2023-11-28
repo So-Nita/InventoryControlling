@@ -1,4 +1,5 @@
 using InventoryLib.Interface;
+using InventoryLib.Models.Response.Product;
 
 namespace InventoryConsole.Helper;
 
@@ -11,14 +12,15 @@ public class Helper
             _productService = productService;
     }
 
-    public async Task GetAllProducts()
+    public void GetAllProducts()
     { 
-        var products = await _productService.GetAllProducts(); 
+        var products = _productService.ReadAll().Result; 
 
         foreach (var product in products) 
         { 
             Console.WriteLine($"Product ID: {product.Id}, Name: {product.Name}, Price: {product.Price}");
         }
+        
     }
     
 }

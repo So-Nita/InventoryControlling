@@ -14,29 +14,33 @@ public class Repository<TE> : IRepository<TE> where TE : class
         _context = context;
     }
 
-    public async Task<IEnumerable<TE>> GetAll()=> await _context.Set<TE>().ToListAsync();
+    public IEnumerable<TE> GetAll()=> _context.Set<TE>().ToList();
     
     public IQueryable<TE?> GetQueryable()
     {
         return _context.Set<TE>().AsQueryable();
     }
-    public async Task<TE?> GetById(string id)
+
+    public TE? GetById(string id)
     {
-        return await _context.Set<TE>().FindAsync(id);
+        return _context.Set<TE>().Find(id);
     }
 
-    public async void Add(TE entity)
+    public void Add(TE entity)
     {
-        await _context.Set<TE>().AddAsync(entity);
+         _context.Set<TE>().Add(entity);
     }
+
     public void Update(TE entity)
     {
         _context.Set<TE>().Update(entity);
     }
+
     public void Delete(TE entity)
     {
         _context.Set<TE>().Remove(entity);
     }
+
     public void SaveChanges()
     {
         try
@@ -46,6 +50,32 @@ public class Repository<TE> : IRepository<TE> where TE : class
         catch { throw new ArgumentException(); }
     }
 
+    public void AddRange(ICollection<TE> entities)
+    {
+        try
+        {
+            _context.AddRange(entities);
+        }
+        catch { throw new ArgumentException(); }
+    }
+
+    public void UpdateRange(ICollection<TE> entities)
+    {
+        try
+        {
+            _context.UpdateRange(entities);
+        }
+        catch(Exception ex) { throw new ArgumentException(ex.Message); }
+    }
+
+    public void DeleteRange(ICollection<TE> entities)
+    {
+        try
+        {
+            _context.RemoveRange(entities);
+        }
+        catch (Exception ex) { throw new ArgumentException(ex.Message); }
+    }
 }
 
 
