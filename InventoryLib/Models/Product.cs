@@ -7,6 +7,7 @@ public class Product
     public string Name { get; set; } = "";
     public decimal Price { get; set; }
     //public decimal SellPrice { get; set; }
+    public int? Qty { get; set; }
     public string Image { get; set; } = "";
     public decimal Cost { get; set; }
     public string CategoryId { get; set; } = null!;

@@ -1,4 +1,5 @@
-﻿using InventoryLib.Constant;
+﻿using System.Transactions;
+using InventoryLib.Constant;
 using InventoryLib.Interface;
 using InventoryLib.Models;
 
@@ -9,6 +10,8 @@ namespace InventoryLib.Services
         protected readonly string ProductId;
         protected readonly int Qty;
         public abstract int Factor { get; }
+        public int ProductQty { get; internal set; }
+        public abstract StatusType TransactionStatus { get; }
 
         protected StockTransaction(string productId, int qty, DateTime date, StatusType status)
         {
@@ -17,12 +20,22 @@ namespace InventoryLib.Services
         }
         public abstract void OperateOn(StockingService stockingService);
 
-        public abstract Stocking GetStock();
-
+        //public abstract Stocking GetStock();
+        public Stocking GetStock()
+        {
+            return new Stocking
+            {
+                Id = Guid.NewGuid().ToString(),
+                ProductId = ProductId,
+                Qty = Qty,
+                TransactionDate = DateTime.Now,
+                Status = TransactionStatus
+            };
+        }
         protected void AddQtyToStock(StockingService stockingService)
         {
-            var product = stockingService.Read(new Key() { Id = ProductId });
-            product.Result.Qty += Qty * Factor;
+            var product = stockingService.Read(new Key() { Id=ProductId});
+            ProductQty = product.Result!.Qty + (Qty * Factor);
         }
     }
 
@@ -40,17 +53,8 @@ namespace InventoryLib.Services
             AddQtyToStock(stockingService);
         }
 
-        public override Stocking GetStock()
-        {
-            return new Stocking
-            {
-                Id = Guid.NewGuid().ToString(),
-                ProductId = ProductId,
-                Qty = Qty,
-                TransactionDate = DateTime.Now,
-                Status = StatusType.StockIn
-            };
-        }
+        public override StatusType TransactionStatus => StatusType.StockIn;
+       
     }
 
     public class StockOutTransaction : StockTransaction
@@ -67,16 +71,7 @@ namespace InventoryLib.Services
             AddQtyToStock(stockingService);
         }
 
-        public override Stocking GetStock()
-        {
-            return new Stocking
-            {
-                Id = Guid.NewGuid().ToString(),
-                ProductId = ProductId,
-                Qty = Qty,
-                TransactionDate = DateTime.Now,
-                Status = StatusType.StockOut
-            };
-        }
-    }   
+        public override StatusType TransactionStatus => StatusType.StockOut;
+
+    }
 }

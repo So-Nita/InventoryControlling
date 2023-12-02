@@ -25,43 +25,6 @@ namespace InventoryLib.Services
             _unitWork = unitOfWork;
         }
 
-        //       public Response<string> Create(StockingCreateReq req)
-        //       {
-        //           try
-        //           {
-        //               var validationErrors = DataValidation<StockingCreateReq>.ValidateDynamicTypes(req);
-        //               if (validationErrors.Count > 0)
-        //               {
-        //                   return Response<string>.Fail(data: validationErrors.First().ToString());
-        //               }
-        //               var stock = new Stocking()
-        //               {
-        //                   Id = Guid.NewGuid().ToString(),
-        //                   ProductId = req.ProductId,
-        //                   Qty = req.Qty,
-        //                   TransactionDate = DateTime.Now
-        //               };
-
-        //               if (req.Status == StatusType.StockIn)
-        //               {
-        //                   //stock = AddStock(StockingCreateReq);
-        //               }
-        //               else if(req.Status == StatusType.StockOut)
-        //               {
-        //                   //stock = RemoveStock(StockingCreateReq);
-        //               }
-
-
-        //               _unitWork.GetRepository<Stocking>().Add(stock);
-        //               _unitWork.Save();
-
-        //               return Response<string>.Fail("Created Successfully.");
-        //           }
-        //           catch
-        //           {
-        //               return Response<string>.Fail("Failed to create stocking.");
-        //           }
-        //       }
         private StockTransaction? CreateStockTransaction(StockingCreateReq req)
         {
             try
@@ -82,6 +45,7 @@ namespace InventoryLib.Services
                 }
 
                 transaction.OperateOn(this);
+
                 return transaction;
             }
             catch
@@ -99,14 +63,24 @@ namespace InventoryLib.Services
                 {
                     return Response<string>.Fail(data: validationErrors.First().ToString());
                 }
-
-                var transaction = CreateStockTransaction(req);
-                if (transaction == null)
+                var product = _unitWork.GetRepository<Product>().GetById(req.ProductId);
+                if (product == null)
                 {
-                    return Response<string>.Fail("Failed to create stocking.");
+                    return Response<string>.NotFound("Product Id does not existing.");
                 }
+                if ((product.Qty.Equals(null) || product.Qty<req.Qty) && req.Status== StatusType.StockOut )
+                {
+                    return Response<string>.Fail($"Failed Product qty is Limited.");
+                }
+                var transaction = CreateStockTransaction(req);
+
+                if (transaction == null) return Response<string>.Fail("Failed to create stocking product");
+
+                product.Qty = transaction.ProductQty;
 
                 _unitWork.GetRepository<Stocking>().Add(transaction.GetStock());
+                _unitWork.GetRepository<Product>().Update(product);
+
                 _unitWork.Save();
 
                 return Response<string>.Success("Created Successfully.");
@@ -114,6 +88,7 @@ namespace InventoryLib.Services
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                _unitWork.RollBackTransaction();
                 return Response<string>.Fail("Failed to create stocking.");
             }
         }
@@ -123,26 +98,28 @@ namespace InventoryLib.Services
             try
             {
                 var stock = _unitWork.GetRepository<Product>().GetQueryable()
-                            .Where(e=>e.Id==key.Id)
+                            .Where(e => e.Id == key.Id && e.IsDeleted == false)
                             .Include(e=>e.Stockings)
-                            .Select(e=>new StockingResponse()
-                            {
-                                ProductId = e.Id,
-                                ProductName = e.Name,
-                                Price = e.Price,
-                                Qty = e.Stockings.Sum(e=>e.Qty),
-                                Stockings = e.Stockings.Select(s=>new Stocking()
-                                {
-                                    Id = s.Id,
-                                    ProductId = s.ProductId,
-                                    Qty = s.Qty,
-                                    Status = s.Status
-                                }).ToList()
-                            }).First();
+                            .Select(e => new StockingResponse()
+                             {
+                                 ProductId = e.Id,
+                                 ProductName = e.Name,
+                                 Price = e.Price,
+                                 Qty = e.Qty ?? 0,
+                                 Stockings = e.Stockings.Select(s => new Stocking()
+                                 {
+                                     Id = s.Id,
+                                     ProductId = s.ProductId,
+                                     Qty = s.Qty,
+                                     Status = s.Status
+                                 }).ToList()
+                             }).First();
+                
                 return Response<StockingResponse>.Success(stock)!;
             }
-            catch
+            catch(Exception ec)
             {
+                Console.Write(ec);
                 return Response<StockingResponse>.Fail(null)!;
             }
         }
@@ -159,8 +136,8 @@ namespace InventoryLib.Services
                                 ProductId = e.Id,
                                 ProductName = e.Name,
                                 Price = e.Price,
-                                Qty = e.Stockings!.Sum(e => e.Qty),
-                                Stockings = e.Stockings.Select(s => new Stocking()
+                                Qty = (int)e.Qty!,
+                                Stockings = e.Stockings.OrderBy(e=>e.TransactionDate).Select(s => new Stocking()
                                 {
                                     Id = s.Id,
                                     ProductId = s.ProductId,
@@ -183,6 +160,8 @@ namespace InventoryLib.Services
         {
             try
             {
+                var stock = _unitWork.GetRepository<Stocking>().GetById(req.Id);
+                if (stock == null) return Response<string>.NotFound("Stocking transaction not found.");
                 return Response<string>.Success();
             }
             catch
@@ -194,10 +173,19 @@ namespace InventoryLib.Services
         {
             try
             {
-                return Response<string>.Success();
+                if (key == null) return Response<string>.Fail("Stocking Id is required.");
+
+                var stock = _unitWork.GetRepository<Stocking>().GetById(key);
+                if(stock==null) return Response<string>.Fail("Stocking Id does not existing.");
+
+                _unitWork.GetRepository<Stocking>().Delete(stock);
+                _unitWork.Save();
+
+                return Response<string>.Success("Deleted Stocking Transaction successfully");
             }
-            catch
+            catch(ArgumentException ex)
             {
+                Console.WriteLine(ex);
                 return Response<string>.Fail();
             }
         }

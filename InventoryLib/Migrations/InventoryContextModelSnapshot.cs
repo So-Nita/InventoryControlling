@@ -3,6 +3,7 @@ using System;
 using InventoryLib.DataConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -17,7 +18,9 @@ namespace InventoryLib.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.13")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("InventoryLib.Models.Category", b =>
                 {
@@ -39,7 +42,7 @@ namespace InventoryLib.Migrations
                         .HasMaxLength(550)
                         .HasColumnType("varchar");
 
-                    b.Property<ulong?>("IsDeleted")
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -165,7 +168,7 @@ namespace InventoryLib.Migrations
                         .HasMaxLength(550)
                         .HasColumnType("nvarchar");
 
-                    b.Property<ulong?>("IsDeleted")
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -175,6 +178,9 @@ namespace InventoryLib.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(8,2)");
+
+                    b.Property<int?>("Qty")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -200,10 +206,8 @@ namespace InventoryLib.Migrations
                     b.Property<int>("Qty")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime");
@@ -237,7 +241,6 @@ namespace InventoryLib.Migrations
                         .HasColumnType("varchar");
 
                     b.Property<int>("Role")
-                        .HasMaxLength(50)
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")

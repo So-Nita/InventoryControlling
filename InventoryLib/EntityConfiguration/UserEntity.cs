@@ -17,7 +17,6 @@ namespace InventoryLib.EntityConfiguration
             builder.Property(e => e.Role)
                 .IsRequired()
                 .HasColumnType("int")   
-                .HasMaxLength(50)
                 .HasConversion<int>();   
 
             builder.Property(e => e.Image).IsRequired().HasColumnType("nvarchar").HasMaxLength(550);

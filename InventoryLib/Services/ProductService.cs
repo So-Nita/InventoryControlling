@@ -78,6 +78,7 @@ public class ProductService : IProductService
                 Price = e.Price,
                 Cost = e.Cost,
                 Image = e.Image,
+                Qty = e.Qty,
                 Description = e.Description!,
                 CreatedAt = e.CreatedAt,
                 CategoryId = e.CategoryId,
@@ -96,7 +97,9 @@ public class ProductService : IProductService
         try
         {
             var product = _unitOfWork.GetRepository<Product>().GetQueryable()
-                .Where(e=>e.Id==key.Id || e.Code==key.Code).Include(e =>e.Category)
+                .Where(e=>e.Id==key.Id || e.Code==key.Code)
+                .Where(e=>e.IsDeleted==false)
+                .Include(e =>e.Category)
                 .Select(e=> new ProductResponse()
                 {
                     Id = e.Id,
@@ -104,6 +107,7 @@ public class ProductService : IProductService
                     Code = e.Code,
                     Price = e.Price,
                     Cost = e.Cost,
+                    Qty = e.Qty,
                     Image = e.Image,
                     CategoryId = e.CategoryId,
                     CategoryName = e.Category.Name

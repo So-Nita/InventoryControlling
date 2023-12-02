@@ -24,8 +24,12 @@ namespace InventoryLib.EntityConfiguration
                 .HasColumnType("varchar")
                 .HasMaxLength(36);
             builder.Property(e => e.Qty).IsRequired().HasColumnType("int");
-            builder.Property(e => e.Status).IsRequired()
-                .HasColumnType("varchar").HasMaxLength(100);
+
+            builder.Property(e => e.Status)
+                .IsRequired()
+                .HasColumnType("int")
+                .HasConversion<int>();
+
             builder.Property(e => e.TransactionDate).IsRequired()
                 .HasColumnType("datetime");
 

@@ -27,7 +27,6 @@
       <None Remove="Interface\IService\" />
       <None Remove="Models\Response\Stocking\" />
       <None Remove="Models\Request\Stocking\" />
-      <None Remove="Services\StockCal\" />
       <None Remove="Models\Response\User\" />
       <None Remove="Models\Response\Order\" />
       <None Remove="Models\Response\OrderDetail\" />
@@ -45,7 +44,6 @@
       <Folder Include="Interface\IService\" />
       <Folder Include="Models\Response\Stocking\" />
       <Folder Include="Models\Request\Stocking\" />
-      <Folder Include="Services\StockCal\" />
       <Folder Include="Models\Response\User\" />
       <Folder Include="Models\Response\Order\" />
       <Folder Include="Models\Response\OrderDetail\" />

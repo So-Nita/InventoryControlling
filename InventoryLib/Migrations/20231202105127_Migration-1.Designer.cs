@@ -3,6 +3,7 @@ using System;
 using InventoryLib.DataConfiguration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -11,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventoryLib.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    [Migration("20231125125544_Migration-1")]
+    [Migration("20231202105127_Migration-1")]
     partial class Migration1
     {
         /// <inheritdoc />
@@ -20,7 +21,9 @@ namespace InventoryLib.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.13")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("InventoryLib.Models.Category", b =>
                 {
@@ -33,7 +36,7 @@ namespace InventoryLib.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(100)
+                        .HasMaxLength(255)
                         .IsUnicode(true)
                         .HasColumnType("nvarchar");
 
@@ -42,17 +45,20 @@ namespace InventoryLib.Migrations
                         .HasMaxLength(550)
                         .HasColumnType("varchar");
 
-                    b.Property<ulong?>("IsDeleted")
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
+                        .HasMaxLength(50)
                         .HasColumnType("varchar");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("InventoryLib.Models.Order", b =>
@@ -71,7 +77,7 @@ namespace InventoryLib.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("InventoryLib.Models.OrderDetail", b =>
@@ -98,9 +104,11 @@ namespace InventoryLib.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OrderId");
+
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderDetails", (string)null);
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("InventoryLib.Models.PriceHistory", b =>
@@ -163,7 +171,7 @@ namespace InventoryLib.Migrations
                         .HasMaxLength(550)
                         .HasColumnType("nvarchar");
 
-                    b.Property<ulong?>("IsDeleted")
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -174,6 +182,9 @@ namespace InventoryLib.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(8,2)");
 
+                    b.Property<int?>("Qty")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -181,7 +192,7 @@ namespace InventoryLib.Migrations
                     b.HasIndex("Code")
                         .IsUnique();
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("InventoryLib.Models.Stocking", b =>
@@ -195,12 +206,10 @@ namespace InventoryLib.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("varchar");
 
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar");
-
                     b.Property<int>("Qty")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("TransactionDate")
@@ -210,7 +219,7 @@ namespace InventoryLib.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Stockings", (string)null);
+                    b.ToTable("Stockings");
                 });
 
             modelBuilder.Entity("InventoryLib.Models.User", b =>
@@ -219,18 +228,23 @@ namespace InventoryLib.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("varchar");
 
-                    b.Property<long>("Contact")
-                        .HasColumnType("long");
+                    b.Property<string>("Contact")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasMaxLength(550)
+                        .HasColumnType("nvarchar");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar");
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -249,7 +263,7 @@ namespace InventoryLib.Migrations
                 {
                     b.HasOne("InventoryLib.Models.Order", "Order")
                         .WithMany("OrderDetails")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

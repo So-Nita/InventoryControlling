@@ -16,6 +16,7 @@ public class ProductController : ControllerBase
         _service = service;
     }
     [HttpGet]
+
     public IActionResult GetAllProducts()
     {
         try

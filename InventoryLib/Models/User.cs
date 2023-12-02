@@ -13,7 +13,8 @@ namespace InventoryLib.Models
         public string UserName { get; set; } = null!;
         public string Image { get; set; } = "";
         public RoleType Role { get; set; }
-        public string Contact { get; set; } = "";
+        public string Contact { get; set; } =null!; 
         public string Password { get; set; } = null!;
     }
+
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using InventoryLib.Constant;
+﻿using InventoryLib.Constant;
 using InventoryLib.Interface;
 using InventoryLib.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InventoryWebApi.Controller
 {
-    [ApiController] [Route("api/stocking")]
+    [ApiController][Route("api/stocking")]
 
     public class StockingController : ControllerBase
     {
@@ -32,7 +28,7 @@ namespace InventoryWebApi.Controller
             return Ok(data);
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Create([FromBody] StockingCreateReq req)
         {
             var data = _service.Create(req);
@@ -43,15 +39,22 @@ namespace InventoryWebApi.Controller
             return Ok(data);
         }
 
-        [HttpGet]
+        [HttpPost("getById")]
         public IActionResult GetById(Key req)
         {
-            var data = _service.Read(req);
-            if (data.Status != (int)ResponseStatusType.Success)
+            try
             {
-                return BadRequest(data);
+                var data = _service.Read(req);
+                if (data.Status != (int)ResponseStatusType.Success)
+                {
+                    return BadRequest(data);
+                }
+                return Ok(data);
             }
-            return Ok(data);
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpPut]

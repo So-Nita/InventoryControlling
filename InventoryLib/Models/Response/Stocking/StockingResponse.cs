@@ -11,6 +11,6 @@ namespace InventoryLib.Services
         //public StatusType Status { get; set; }
         public decimal Price { get; set; }
         public int Qty { get; set; }
-        public List<Stocking> Stockings { get; set; } = new List<Stocking>();
+        public List<Stocking>? Stockings { get; set; } = new List<Stocking>();
     }
 }
