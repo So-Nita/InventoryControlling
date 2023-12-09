@@ -34,6 +34,7 @@
       <None Remove="Models\Request\Order\" />
       <None Remove="Models\Request\OrderDetail\" />
       <None Remove="Models\Request\PriceHistory\" />
+      <None Remove="Models\Request\User\" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="DataResponse\" />
@@ -51,5 +52,6 @@
       <Folder Include="Models\Request\Order\" />
       <Folder Include="Models\Request\OrderDetail\" />
       <Folder Include="Models\Request\PriceHistory\" />
+      <Folder Include="Models\Request\User\" />
     </ItemGroup>
 </Project>

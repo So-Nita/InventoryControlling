@@ -198,6 +198,10 @@ namespace InventoryLib.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("varchar");
 
+                    b.Property<string>("Note")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar");
+
                     b.Property<string>("ProductId")
                         .IsRequired()
                         .HasMaxLength(36)

@@ -8,6 +8,7 @@ using InventoryLib.Models.Response.Category;
 using InventoryLib.UnitOfWork;
 using InventoryLib.Validation;
 using Microsoft.EntityFrameworkCore.Update.Internal;
+using Microsoft.IdentityModel.Tokens;
 
 namespace InventoryLib.Services
 {
@@ -81,9 +82,10 @@ namespace InventoryLib.Services
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = req.Name,
-                    Image = req.Image,
+                    Image = req.Image!,
                     Description = req.Description,
-                    CreatedAt = DateTime.Now
+                    CreatedAt = DateTime.Now,
+                    IsDeleted = false
                 };
 
                 _unitWork.GetRepository<Category>().Add(category);
@@ -101,22 +103,22 @@ namespace InventoryLib.Services
         {
             try
             {
-                var validationErrors = DataValidation<CategoryUpdateReq>.ValidateDynamicTypes(req);
-                if (validationErrors.Count > 0)
+                var validationErrors = req.Id.IsNullOrEmpty();
+                if (validationErrors)
                 {
-                    return Response<string>.Fail(validationErrors.First().ToString());
+                    return Response<string>.Fail("Field Id is requried.");
                 }
-                var foundCate = _unitWork.GetRepository<Category>().GetById(req.Id);
+                var foundCate = _unitWork.GetRepository<Category>()
+                                .GetQueryable().Where(e=>e.Id== req.Id&&e.IsDeleted==false).First();
                 if (foundCate == null)
                 {
                     return Response<string>.NotFound("Category does not existing.");
                 }
 
-                foundCate.Name = req.Name ?? foundCate.Name;
+                foundCate.Name = (req.Name=="") ? foundCate.Name : req.Name!;
                 foundCate.Image = req.Image ?? foundCate.Image;
                 foundCate.Description = req.Description ?? foundCate.Description;
-                foundCate.IsDeleted = (foundCate.IsDeleted != req.IsDeleted) ? req.IsDeleted : foundCate.IsDeleted;
-
+               
                 _unitWork.GetRepository<Category>().Update(foundCate);
                 _unitWork.Save();
 

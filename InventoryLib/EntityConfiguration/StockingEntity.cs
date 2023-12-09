@@ -32,6 +32,9 @@ namespace InventoryLib.EntityConfiguration
 
             builder.Property(e => e.TransactionDate).IsRequired()
                 .HasColumnType("datetime");
+            builder.Property(e => e.Note).IsRequired(false)
+                .HasColumnType("varchar")
+                .HasMaxLength(255);
 
             builder.HasOne(x => x.Product)
                  .WithMany(p => p.Stockings)

@@ -12,6 +12,7 @@ namespace InventoryLib.Models
         public string Id { get; set; } = "";
         public decimal TotalPrice { get; set; }  
         public DateTime OrderDate { get; set; }
+        //public string User_Id { get; set; } = "";
 
         public ICollection<OrderDetail>? OrderDetails { get; set; }  
     }

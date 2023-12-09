@@ -33,11 +33,11 @@ namespace InventoryLib.Services
 
                 if (req.Status == StatusType.StockIn)
                 {
-                    transaction = new StockInTransaction(req.ProductId, req.Qty);
+                    transaction = new StockInTransaction(req.ProductId, req.Qty,req.Note!);
                 }
                 else if (req.Status == StatusType.StockOut)
                 {
-                    transaction = new StockOutTransaction(req.ProductId, req.Qty);
+                    transaction = new StockOutTransaction(req.ProductId, req.Qty,req.Note!);
                 }
                 else
                 {
@@ -77,7 +77,7 @@ namespace InventoryLib.Services
                 if (transaction == null) return Response<string>.Fail("Failed to create stocking product");
 
                 product.Qty = transaction.ProductQty;
-
+               // var test = transaction.GetStock();
                 _unitWork.GetRepository<Stocking>().Add(transaction.GetStock());
                 _unitWork.GetRepository<Product>().Update(product);
 
@@ -106,12 +106,14 @@ namespace InventoryLib.Services
                                  ProductName = e.Name,
                                  Price = e.Price,
                                  Qty = e.Qty ?? 0,
-                                 Stockings = e.Stockings.Select(s => new Stocking()
+                                 Stockings = e.Stockings.Select(s => new ProductStocking()
                                  {
                                      Id = s.Id,
                                      ProductId = s.ProductId,
                                      Qty = s.Qty,
-                                     Status = s.Status
+                                     Status = s.Status.ToString(),
+                                     Note = s.Note,
+                                     TransactionDate = s.TransactionDate
                                  }).ToList()
                              }).First();
                 
@@ -137,12 +139,14 @@ namespace InventoryLib.Services
                                 ProductName = e.Name,
                                 Price = e.Price,
                                 Qty = (int)e.Qty!,
-                                Stockings = e.Stockings.OrderBy(e=>e.TransactionDate).Select(s => new Stocking()
+                                Stockings = e.Stockings!.Select(s => new ProductStocking()
                                 {
                                     Id = s.Id,
                                     ProductId = s.ProductId,
                                     Qty = s.Qty,
-                                    Status = s.Status
+                                    Status = s.Status.ToString(),
+                                    Note = s.Note,
+                                    TransactionDate = s.TransactionDate
                                 }).ToList()
                             }).ToList();
                
@@ -162,13 +166,33 @@ namespace InventoryLib.Services
             {
                 var stock = _unitWork.GetRepository<Stocking>().GetById(req.Id);
                 if (stock == null) return Response<string>.NotFound("Stocking transaction not found.");
-                return Response<string>.Success();
+
+                stock.Qty = req.Qty ?? stock.Qty;  
+                stock.Status = req.Status ?? stock.Status;  
+
+                var product = _unitWork.GetRepository<Product>().GetById(stock.ProductId);
+
+                var stockTransactions = _unitWork.GetRepository<Stocking>().GetQueryable()
+                    .Where(s => s.ProductId == stock.ProductId)
+                    .ToList();
+
+                int totalQty = stockTransactions.Sum(s => s.Qty * (s.Status == StatusType.StockIn ? 1 : -1));
+                product.Qty = totalQty;
+
+                _unitWork.GetRepository<Stocking>().Update(stock);
+                _unitWork.GetRepository<Product>().Update(product);
+                _unitWork.Save();
+
+                return Response<string>.Success("Stocking transaction and associated product updated successfully.");
             }
-            catch
+            catch (Exception ex)
             {
-                return Response<string>.Fail();
+                _unitWork.RollBackTransaction();
+                Console.WriteLine(ex);
+                return Response<string>.Fail("Failed to update stocking transaction and associated product.");
             }
         }
+
         public Response<string> Delete(string key)
         {
             try
@@ -176,20 +200,40 @@ namespace InventoryLib.Services
                 if (key == null) return Response<string>.Fail("Stocking Id is required.");
 
                 var stock = _unitWork.GetRepository<Stocking>().GetById(key);
-                if(stock==null) return Response<string>.Fail("Stocking Id does not existing.");
+                if (stock == null) return Response<string>.Fail("Stocking Id does not exist.");
+
+                var product = _unitWork.GetRepository<Product>().GetById(stock.ProductId);
+
+                var stockTransactions = _unitWork.GetRepository<Stocking>().GetQueryable()
+                    .Where(s => s.ProductId == stock.ProductId)
+                    .ToList();
+
+                int totalQty = stockTransactions.Sum(s => s.Qty * (s.Status == StatusType.StockIn ? 1 : -1));
+                if (stock.Status == StatusType.StockOut)
+                {
+                    totalQty += stock.Qty;
+                }
+                else
+                {
+                    totalQty -= stock.Qty;
+                }
+                product.Qty = totalQty;
 
                 _unitWork.GetRepository<Stocking>().Delete(stock);
+                _unitWork.GetRepository<Product>().Update(product);
                 _unitWork.Save();
 
                 return Response<string>.Success("Deleted Stocking Transaction successfully");
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
+                _unitWork.RollBackTransaction();
                 Console.WriteLine(ex);
                 return Response<string>.Fail();
             }
         }
+ 
     }
 
-    
+
 }

@@ -7,6 +7,7 @@ namespace InventoryLib.Services
         public string ProductId { get; set; } = "";
         public StatusType Status { get; set; }
         public int Qty { get; set; }
-        public DateTime TransactionDate { get; set; }
+        //public DateTime TransactionDate { get; set; }
+        public string? Note { get; set; }
     }
 }

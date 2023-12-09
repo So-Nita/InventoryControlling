@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.NetworkInformation;
 using InventoryLib.DataResponse;
 using InventoryLib.Interface;
 using InventoryLib.Interface.IService;
@@ -14,11 +15,14 @@ namespace InventoryLib.Services
 	public class OrderService : IOrderService
 	{
         private readonly IUnitOfWork _unitWork;
+        private readonly IStockingService _stockService;
 
-		public OrderService(IUnitOfWork unitOfWork)
+		public OrderService(IUnitOfWork unitOfWork,IStockingService stocking)
 		{
             _unitWork = unitOfWork;
+            _stockService = stocking;
 		}
+
         public Response<string> Create(OrderCreateReq req)
         {
             var validationErrors = DataValidation<OrderCreateReq>.ValidateDynamicTypes(req);
@@ -27,45 +31,61 @@ namespace InventoryLib.Services
                 return Response<string>.Fail(data: validationErrors.First().ToString());
             }
 
-            var products = _unitWork.GetRepository<Product>().GetQueryable().Where(e => e.IsDeleted.Equals(false)).ToList();
-
+            var products = _unitWork.GetRepository<Product>().GetQueryable()
+                .Where(e => e.IsDeleted.Equals(false) && e.Qty>0).ToList();
+            var order = new Order();
             var orderDetails = new List<OrderDetail>();
-            var order = new Order()
+
+            if (products.Count != 0) //
             {
-                Id = Guid.NewGuid().ToString(),
-                OrderDate = DateTime.Now.Date,
-            };
-
-            foreach (var item in req.OrderDetails)
-            {
-                var productFound = products.Where(e => e!.Id == item.ProductId).First();
-
-                if (productFound == null)
-                {
-                    return Response<string>.NotFound($"Product Id {item.ProductId} not found.");
-                }
-
-                var orderDetail = new OrderDetail()
+                var stockings = new List<Stocking>();
+                order = new Order()
                 {
                     Id = Guid.NewGuid().ToString(),
-                    OrderId = order.Id,
-                    ProductId = item.ProductId,
-                    Price = productFound.Price,
-                    Qty = item.Qty,
+                    OrderDate = DateTime.Now.Date,
                 };
 
-                orderDetails.Add(orderDetail);
-            }
-            var total = orderDetails.Sum(e => e.Price * e.Qty);
-            order.TotalPrice = total;
-            
-             //_unitWork.BeginTransaction();
+                foreach (var item in req.OrderDetails)
+                {
+                    var productFound = products.Where(e => e!.Id == item.ProductId).First();
 
+                    if (productFound == null)
+                    {
+                        return Response<string>.NotFound($"Product Id {item.ProductId} not found.");
+                    }
+                    if (productFound.Qty < item.Qty) return Response<string>.Fail($"Product Id {item.ProductId} current qty is {productFound.Qty}.");
+                    var orderDetail = new OrderDetail()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        OrderId = order.Id,
+                        ProductId = item.ProductId,
+                        Price = productFound.Price,
+                        Qty = item.Qty,
+                    };
+                    var stocking = new StockingCreateReq()
+                    {
+                        Qty = item.Qty,
+                        ProductId = item.ProductId,
+                        Status = Constant.StatusType.StockOut,
+                        Note = "Sell Order",
+                    };
+                    _stockService.Create(stocking);
+
+                    orderDetails.Add(orderDetail);
+                }
+
+                var total = orderDetails.Sum(e => e.Price * e.Qty);
+                order.TotalPrice = total;
+            }
+            else
+            {
+                return Response<string>.Fail("Product is not avialable");
+            }
+             //_unitWork.BeginTransaction();
             try
             {
                 _unitWork.GetRepository<Order>().Add(order);
                 _unitWork.GetRepository<OrderDetail>().AddRange(orderDetails);
-
                 _unitWork.Save();
 
                 return Response<string>.Success("Created Order Successfully.");

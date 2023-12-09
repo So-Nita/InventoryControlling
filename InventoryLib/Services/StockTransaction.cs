@@ -9,14 +9,16 @@ namespace InventoryLib.Services
     {
         protected readonly string ProductId;
         protected readonly int Qty;
+        protected readonly string? Note;
         public abstract int Factor { get; }
         public int ProductQty { get; internal set; }
         public abstract StatusType TransactionStatus { get; }
 
-        protected StockTransaction(string productId, int qty, DateTime date, StatusType status)
+        protected StockTransaction(string productId, int qty,string note ,DateTime date, StatusType status)
         {
             ProductId = productId;
             Qty = qty;
+            Note = note;
         }
         public abstract void OperateOn(StockingService stockingService);
 
@@ -29,7 +31,8 @@ namespace InventoryLib.Services
                 ProductId = ProductId,
                 Qty = Qty,
                 TransactionDate = DateTime.Now,
-                Status = TransactionStatus
+                Status = TransactionStatus,
+                Note = Note
             };
         }
         protected void AddQtyToStock(StockingService stockingService)
@@ -41,8 +44,8 @@ namespace InventoryLib.Services
 
     public class StockInTransaction : StockTransaction
     {
-        public StockInTransaction(string productId, int qty)
-            : base(productId, qty, DateTime.Now, StatusType.StockIn)
+        public StockInTransaction(string productId, int qty, string note)
+            : base(productId, qty, note, DateTime.Now, StatusType.StockOut)
         {
         }
 
@@ -59,8 +62,8 @@ namespace InventoryLib.Services
 
     public class StockOutTransaction : StockTransaction
     {
-        public StockOutTransaction(string productId, int qty)
-            : base(productId, qty, DateTime.Now, StatusType.StockOut)
+        public StockOutTransaction(string productId, int qty,string note)
+            : base(productId,qty,note,DateTime.Now,StatusType.StockOut)
         {
         }
 

@@ -9,6 +9,7 @@ public class Stocking
     public StatusType Status { get; set; }
     public int Qty { get; set; }
     public DateTime TransactionDate { get; set; }
+    public string? Note { get; set; }
 
     public Product? Product { get; set; } 
 }

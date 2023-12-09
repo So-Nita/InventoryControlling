@@ -15,7 +15,6 @@ namespace InventoryLib.Services;
 public class ProductService : IProductService
 {
     private readonly IUnitOfWork _unitOfWork;
-    
     public ProductService(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
@@ -62,6 +61,7 @@ public class ProductService : IProductService
             return Response<string>.Fail("Failed Create Product.");
         }
     }
+    private string DefaultImage = "https://telugufoods.com/wp-content/uploads/telugufoods-biryani-masala-new.png";
 
     public Response<List<ProductResponse>> ReadAll()
     {
@@ -77,7 +77,7 @@ public class ProductService : IProductService
                 Name = e.Name,
                 Price = e.Price,
                 Cost = e.Cost,
-                Image = e.Image,
+                Image = e.Image??DefaultImage,
                 Qty = e.Qty,
                 Description = e.Description!,
                 CreatedAt = e.CreatedAt,
@@ -97,7 +97,8 @@ public class ProductService : IProductService
         try
         {
             var product = _unitOfWork.GetRepository<Product>().GetQueryable()
-                .Where(e=>e.Id==key.Id || e.Code==key.Code)
+                // .Where(e=>e.Id==key.Id || e.Code==key.Code)
+                .Where(e => e.Id == key.Id)
                 .Where(e=>e.IsDeleted==false)
                 .Include(e =>e.Category)
                 .Select(e=> new ProductResponse()
@@ -108,7 +109,7 @@ public class ProductService : IProductService
                     Price = e.Price,
                     Cost = e.Cost,
                     Qty = e.Qty,
-                    Image = e.Image,
+                    Image = e.Image ?? default!,
                     CategoryId = e.CategoryId,
                     CategoryName = e.Category.Name
                 }).First();
@@ -138,16 +139,9 @@ public class ProductService : IProductService
         {
             return Response<string>.Fail("Price must be more than Cost.");
         }
-        
-        productFound!.Name = req.Name ?? productFound.Name;
-        productFound.Price = (decimal)(req.Price ?? productFound.Price);
-        productFound.Cost = (decimal)(req.Cost ?? productFound.Cost);
-        productFound.Image = req.Image! ?? productFound.Image;
-        productFound.Description = req.Description ?? productFound.Description;
-
-        if (productFound.Price != req.Price)
+        if (req.Price!=null && productFound.Price != req.Price)
         {
-            if (req.Price > productFound.Cost) { return Response<string>.Fail($"Price must be more than Cost is {productFound.Cost}"); }
+            if (req.Price < productFound.Cost) { return Response<string>.Fail($"Price must be more than Cost is {productFound.Cost}"); }
 
             var priceHistory = new PriceHistoryCreateReq()
             {
@@ -157,6 +151,12 @@ public class ProductService : IProductService
             };
             PriceHistoryService.Create(_unitOfWork, priceHistory);
         }
+        productFound!.Name = (req.Name.IsNullOrEmpty()) ? productFound.Name : req.Name!;
+        productFound.Price = (decimal)(req.Price ?? productFound.Price);
+        productFound.Cost = (decimal)(req.Cost ?? productFound.Cost);
+        productFound.Image = req.Image! ?? productFound.Image;
+        productFound.Description = req.Description ?? productFound.Description;
+
         try
         {
             _unitOfWork.GetRepository<Product>().Update(productFound);

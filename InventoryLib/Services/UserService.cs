@@ -3,6 +3,7 @@ using InventoryLib.DataResponse;
 using InventoryLib.Interface;
 using InventoryLib.Interface.IService;
 using InventoryLib.Models;
+using InventoryLib.Models.Request.User;
 using InventoryLib.Models.Response.User;
 
 namespace InventoryLib.Services
@@ -15,12 +16,14 @@ namespace InventoryLib.Services
         {
             _unitWork = unitOfWork;
         }
-        public Response<UserResponse> Read(string Id)
+
+        public Response<UserResponse> Read(UserRequest req)
         {
             try
             {
                 var user = _unitWork.GetRepository<User>().GetQueryable()
-                        .Where(e =>e.Id.Equals(Id)).Select(e=>new UserResponse()
+                        .Where(e =>e.UserName.ToLower().Equals(req.UserName.ToLower()) &&
+                        e.Password==req.Password).Select(e=>new UserResponse()
                         {
                             Id = e.Id,
                             UserName = e.UserName,
