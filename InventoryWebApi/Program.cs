@@ -23,12 +23,6 @@ builder.Services.AddDbContext<InventoryContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 },ServiceLifetime.Transient);
 
-//var connectionStrings = builder.Configuration.GetConnectionString("DefaultConnection");
-//builder.Services.AddDbContext<InventoryContext>(opt =>
-//{
-//    opt.UseMySql(connectionStrings, ServerVersion.AutoDetect(connectionStrings));
-//}, ServiceLifetime.Transient);
-
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 //builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
@@ -43,11 +37,13 @@ builder.Services.AddScoped<IStockingService, StockingService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+/*if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+}*/
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

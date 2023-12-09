@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "a1S7SI/2LyDnjPlPWRrtRJA2yWdaXuahpwIPq3ZH17A=",
+  "Source": "InventoryWebApi",
+  "BasePath": "_content/InventoryWebApi",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

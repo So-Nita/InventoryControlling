@@ -7,6 +7,7 @@ using InventoryLib.DataResponse;
 using InventoryLib.Interface;
 using InventoryLib.Interface.IService;
 using InventoryLib.Models;
+using InventoryLib.Models.Request.User;
 using InventoryLib.Models.Response.User;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -42,14 +43,14 @@ namespace InventoryWebApi.Controller
         }
 
         [HttpPost("getById")]
-        public IActionResult GetAll([FromBody] Key key)
+        public IActionResult Read([FromBody] UserRequest request)
         {
             try
             {
-                var data = _service.Read(key.Id!);
+                var data = _service.Read(request);
                 if (data.Status != (int)ResponseStatusType.Success)
                 {
-                    return NotFound(Response<string>.NotFound("User does not existing."));
+                    return NotFound(Response<string>.NotFound("Incorrect username or password."));
                 }
                 return Ok(data);
             }

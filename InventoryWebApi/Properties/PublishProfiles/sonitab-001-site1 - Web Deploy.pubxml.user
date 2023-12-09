@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword />
+    <History>True|2023-12-04T08:00:59.1858905Z;False|2023-12-04T14:59:10.5381034+07:00;False|2023-12-04T14:56:16.5253865+07:00;False|2023-12-04T14:53:15.5941600+07:00;False|2023-12-04T14:52:18.5233491+07:00;False|2023-12-04T14:43:50.1519355+07:00;False|2023-12-04T14:38:53.2241738+07:00;True|2023-12-04T13:15:36.4425566+07:00;True|2023-12-04T13:01:29.6422936+07:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=SQL5106.site4now.net%3bInitial Catalog=db_aa2617_sonita%3bUser Id=db_aa2617_sonita_admin%3bPwd=Sonita%40atec07</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="InventoryLib.DataConfiguration.InventoryContext">
+      <Value>Data Source=SQL5106.site4now.net%3bInitial Catalog=db_aa2617_sonita%3bUser Id=db_aa2617_sonita_admin%3bPwd=Sonita%40atec07</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

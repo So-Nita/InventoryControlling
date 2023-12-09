@@ -1,31 +1,24 @@
-﻿using InventoryLib.DataConfiguration;
-using InventoryLib.Interface;
-using InventoryLib.Services;
-using InventoryLib.UnitOfWork;
-using Microsoft.EntityFrameworkCore;
+﻿using InventoryConsole;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace InventoryConsole;
-static class Program
+var serviceProvider = new ServiceCollection()
+                .AddSingleton<Startup>()  
+                .BuildServiceProvider();
+
+var startup = serviceProvider.GetService<Startup>();
+
+var serviceCollection = new ServiceCollection();
+startup!.ConfigureServices(serviceCollection);
+
+serviceProvider = serviceCollection.BuildServiceProvider();
+
+var helper = serviceProvider.GetService<Helper>();
+
+if (helper != null)
 {
-    static async Task Main(string[] args)
-    {
-        var serviceProvider = new ServiceCollection()
-            .AddScoped<IUnitOfWork, UnitOfWork>()
-            .AddScoped<IProductService, ProductService>()
-            .AddDbContext<InventoryContext>(options => options.UseSqlServer("Server=localhost;Database=Inventory;User Id=sa;password=MyPassword;trustservercertificate=True;"))
-            .BuildServiceProvider();
-
-        var productService = serviceProvider.GetRequiredService<IProductService>();
-        var productServiceHelper = new Helper.Helper(productService);
-
-        try
-        {
-            productServiceHelper.GetAllProducts();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Error: {e.Message}");
-        }
-    }
+    helper.Run();
+}
+else
+{
+    Console.WriteLine("Helper not found.");
 }

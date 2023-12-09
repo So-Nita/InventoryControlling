@@ -51,23 +51,23 @@ public class CategoryController : ControllerBase
     }
 
     [HttpPost("getById")]
-    public IActionResult GetCategoryById([FromForm] Key key)
+    public IActionResult GetCategoryById([FromBody] Key id)
     {
         try
         {
-            var data = _service.Read(key);
+            var data = _service.Read(id);
             if (data.Status != (int)ResponseStatusType.Success)
             {
-                return BadRequest(data);
+                return NotFound(data);
             }
             return Ok(data);
-        }catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             Console.WriteLine(ex);
-            return BadRequest(ex);
+            return BadRequest();
         }
     }
-
     [HttpPut]
     public IActionResult Update([FromBody] CategoryUpdateReq req)
     {
