@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="CustomStyle\CustomMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CustomStyle\ItemComponent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\CategoryView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\Component\ProductComponentView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\HomeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\LoginFormView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\MainContainerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\ProductView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
