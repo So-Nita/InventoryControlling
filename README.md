@@ -1,5 +1,5 @@
 # Inventory Controlling System
-
+### API on Swagger Link : [(http://sonitab-001-site1.atempurl.com/swagger/index.html)](http://sonitab-001-site1.atempurl.com/swagger/index.html).
   ## Project Structure
    1. ** InventoryConsole (Client - Console): **
         - Project responsible for the console-based user interface for interacting with the inventory management system.
