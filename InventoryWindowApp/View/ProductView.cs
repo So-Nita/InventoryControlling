@@ -1,4 +1,6 @@
-﻿using InventoryApiClient.Services;
+﻿using InventoryApiClient.Model.Category;
+using InventoryApiClient.Model.Product;
+using InventoryApiClient.Services;
 using InventoryWindowApp.CustomStyle;
 using InventoryWindowApp.View.Component;
 using System;
@@ -16,6 +18,9 @@ namespace POSDesignDemo.View
     public partial class ProductView : Form
     {
         private readonly ProductService _service;
+
+        public string DefaultImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsY41l_ifhaMe423V82-fagWBkVLANTLgwoQ&usqp=CAU";
+
         public ProductView()
         {
             InitializeComponent();
@@ -26,7 +31,10 @@ namespace POSDesignDemo.View
 
         private void btnCreatePro_Click(object sender, EventArgs e)
         {
-            AddControlls(new ProductComponentView());
+            var formCreate = new ProductComponentView();
+            formCreate.StartPosition = FormStartPosition.CenterScreen;
+            AddControlls(formCreate);
+
         }
         public void AddControlls(Form form)
         {
@@ -44,16 +52,18 @@ namespace POSDesignDemo.View
         {
             List<Tuple<string, int>> columns = new List<Tuple<string, int>>
             {
-                Tuple.Create("Image", 130),
+                Tuple.Create("Image", 100),
+                Tuple.Create("ID",320),
                 Tuple.Create("Code", 120),
-                Tuple.Create("Name", 250),
-                Tuple.Create("Price", 100),
-                Tuple.Create("Quantity", 100),
-                Tuple.Create("Category", 150),
-                Tuple.Create("", 75),
-                Tuple.Create("", 75),
+                Tuple.Create("Name", 240),
+                Tuple.Create("Cost", 80),
+                Tuple.Create("Price", 80),
+                Tuple.Create("Quantity", 90),
+                Tuple.Create("Category", 140),
+                Tuple.Create("", 70),
+                Tuple.Create("", 70),
             };
-            ItemComponent.SetupDefaultDataGridView(dataGridViewProduct, columns!, ClickUpdateOrDelete, 55);
+            ItemComponent.SetupDefaultDataGridView(dataGridViewProduct, columns!, ClickUpdateOrDelete, 70);
         }
         private async void InitLoadData()
         {
@@ -63,16 +73,24 @@ namespace POSDesignDemo.View
 
                 foreach (var product in products)
                 {
-                    var Image = await ItemComponent.GetImageFromUrl(product.Image);
-                    var index = dataGridViewProduct.Rows.Add(Image, product.Code, product.Name, product.Price, product.Qty, product.CategoryName);
+                    Image Image;
+                    if (product.Image == "")
+                    {
+                        Image = await ItemComponent.GetImageFromUrl(DefaultImg);
+                    }
+                    else
+                    {
+                        Image = await ItemComponent.GetImageFromUrl(product.Image);
+                    }
+                    var index = dataGridViewProduct.Rows.Add(Image, product.Id, product.Code, product.Name, product.Cost, product.Price, product.Qty??0, product.CategoryName);
 
                     DataGridViewButtonCell btnUpdate = ItemComponent.CreateButtonSubstract("Update");
-                    btnUpdate.Style.Padding = new Padding(2, 13, 0, 13);
-                    dataGridViewProduct.Rows[index].Cells[6] = btnUpdate;
+                    btnUpdate.Style.Padding = new Padding(2, 16, 0, 16);
+                    dataGridViewProduct.Rows[index].Cells[8] = btnUpdate;
 
                     DataGridViewButtonCell btnDelete = ItemComponent.CreateButtonSubstract("Delete");
-                    btnDelete.Style.Padding = new Padding(2, 13, 0, 13);
-                    dataGridViewProduct.Rows[index].Cells[7] = btnDelete;
+                    btnDelete.Style.Padding = new Padding(2, 16, 0, 16);
+                    dataGridViewProduct.Rows[index].Cells[9] = btnDelete;
                 }
             }
             catch (Exception ex)
@@ -81,36 +99,63 @@ namespace POSDesignDemo.View
             }
         }
 
-        private void ClickUpdateOrDelete(object? sender, DataGridViewCellEventArgs e)
+        private async void ClickUpdateOrDelete(object? sender, DataGridViewCellEventArgs e)
         {
-           /* int rowIndex = e.RowIndex;
+            int rowIndex = e.RowIndex;
             var columnId = dataGridViewProduct.Rows[rowIndex];
-            var product = new ProductUpdateReq();
+            //var product = new ProductUpdateReq();
 
-            if (e.ColumnIndex == dataGridViewProduct.Columns[6].Index && e.RowIndex >= 0)
+            if (e.ColumnIndex == dataGridViewProduct.Columns[8].Index && e.RowIndex >= 0)
             {
-                product.Id = Convert.ToInt32(columnId.Cells[1].Value);
-                product.Name = columnId.Cells[2].Value?.ToString();
-                product.Category = columnId.Cells[4].Value?.ToString();
-
-                if (double.TryParse(columnId.Cells[3].Value?.ToString(), out double price))
+                var product = new ProductUpdateReq()
                 {
-                    product.Price = price;
-                }
-                formCreateProduct formCreate = new formCreateProduct(product);
-                formCreate.StartPosition = FormStartPosition.CenterScreen;
-                formCreate.ShowDialog();
+                    Image = columnId.Cells[0].Value.ToString()!,
+                    Id = columnId.Cells[1].Value.ToString()!,
+                    Code = columnId.Cells[2].Value.ToString()!,
+                    Name = columnId.Cells[3].Value.ToString()!,
+                    Cost = (decimal)columnId.Cells[4].Value,
+                    Price = (decimal)columnId.Cells[5].Value,
+                    CategoryId = columnId.Cells[6].Value.ToString()!,
+                    Description = columnId.Cells[7].Value.ToString(),
+                };
+                var formCreate = new ProductComponentView(product);
+                AddControlls(formCreate);
             }
-            else if (e.ColumnIndex == dataGridViewProduct.Columns[7].Index && e.RowIndex >= 0)
+            else if (e.ColumnIndex == dataGridViewProduct.Columns[9].Index && e.RowIndex >= 0)
             {
-                var service = new ProductController();
-                var getId = columnId.Cells[1].Value;
-                var result = service.DeleteProduct(Convert.ToInt32(getId));
-                MessageBox.Show(result);
-            }*/
+                var productName = columnId.Cells[3].Value;
+                var result = MessageBox.Show($"Are you sure to delete product {productName}?", "Confirmation", MessageBoxButtons.OKCancel);
+
+                if (result == DialogResult.OK)
+                {
+                    var productId = columnId.Cells[1].Value.ToString();
+                    var data = await _service.DeleteAsync(productId!);
+                    if (data == true)
+                    {
+                        CustomMessageBox.ShowMessageBox("Delete Successfully", true);
+                        dataGridViewProduct.Rows.Clear();
+                        InitLoadData();
+                    }
+                    else
+                    {
+                        CustomMessageBox.ShowMessageBox("Failed to Delete", false);
+                    }
+                }
+            }
         }
 
 
-
     }
+    public class ProductEventArgs : EventArgs
+    {
+        public bool IsCreate { get; }
+        public object Object { get; }
+
+        public ProductEventArgs(bool isCreate, object obj = null)
+        {
+            IsCreate = isCreate;
+            Object = obj;
+        }
+    }
+
 }

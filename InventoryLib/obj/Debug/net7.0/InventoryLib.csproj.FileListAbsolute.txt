@@ -99,3 +99,17 @@ C:\Users\Back-End.07\Downloads\OOAD\InventoryControlling\InventoryLib\obj\Debug\
 C:\Users\Back-End.07\Downloads\OOAD\InventoryControlling\InventoryLib\obj\Debug\net7.0\InventoryLib.pdb
 C:\Users\Back-End.07\Downloads\OOAD\InventoryControlling\InventoryLib\obj\Debug\net7.0\InventoryLib.genruntimeconfig.cache
 C:\Users\Back-End.07\Downloads\OOAD\InventoryControlling\InventoryLib\obj\Debug\net7.0\ref\InventoryLib.dll
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\bin\Debug\net7.0\InventoryLib.deps.json
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\bin\Debug\net7.0\InventoryLib.runtimeconfig.json
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\bin\Debug\net7.0\InventoryLib.dll
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\bin\Debug\net7.0\InventoryLib.pdb
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\obj\Debug\net7.0\InventoryLib.csproj.AssemblyReference.cache
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\obj\Debug\net7.0\InventoryLib.GeneratedMSBuildEditorConfig.editorconfig
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\obj\Debug\net7.0\InventoryLib.AssemblyInfoInputs.cache
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\obj\Debug\net7.0\InventoryLib.AssemblyInfo.cs
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\obj\Debug\net7.0\InventoryLib.csproj.CoreCompileInputs.cache
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\obj\Debug\net7.0\InventoryLib.dll
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\obj\Debug\net7.0\refint\InventoryLib.dll
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\obj\Debug\net7.0\InventoryLib.pdb
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\obj\Debug\net7.0\InventoryLib.genruntimeconfig.cache
+D:\Sonita\InventoryControlling\InventoryControlling\InventoryLib\obj\Debug\net7.0\ref\InventoryLib.dll

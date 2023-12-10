@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "PVflJ+F+uUpMnaCc84eY2XxVLi1cFUIpPsrVYA3m5yZbdWJQv0kmiz0ZR4T9a2kPThwK4RvvYpRgR64poL4DUg==",
+  "dgSpecHash": "kMyhtDH46WHE9PHzDryK6nL7H40UbCPZe2TiiUQz9KBAR2gmlCNAd0UCLo6bJrUIdLX6sRNInHwXHmbe5bMqsg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Back-End.07\\Downloads\\OOAD\\InventoryControlling\\InventoryConsole\\InventoryConsole.csproj",
+  "projectFilePath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryConsole\\InventoryConsole.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Back-End.07\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
-    "C:\\Users\\Back-End.07\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
-    "C:\\Users\\Back-End.07\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\MSI\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
+    "C:\\Users\\MSI\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\MSI\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

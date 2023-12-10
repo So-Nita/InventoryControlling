@@ -61,7 +61,7 @@
             label1.ForeColor = Color.CornflowerBlue;
             label1.Location = new Point(547, 56);
             label1.Name = "label1";
-            label1.Size = new Size(93, 32);
+            label1.Size = new Size(119, 39);
             label1.TabIndex = 0;
             label1.Text = "Log in";
             // 
@@ -71,7 +71,7 @@
             label2.ForeColor = Color.FromArgb(164, 165, 169);
             label2.Location = new Point(460, 118);
             label2.Name = "label2";
-            label2.Size = new Size(69, 17);
+            label2.Size = new Size(89, 23);
             label2.TabIndex = 1;
             label2.Text = "Username";
             // 
@@ -83,7 +83,7 @@
             txtUsername.ForeColor = SystemColors.WindowFrame;
             txtUsername.Location = new Point(12, 5);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(254, 22);
+            txtUsername.Size = new Size(254, 27);
             txtUsername.TabIndex = 2;
             // 
             // label3
@@ -92,7 +92,7 @@
             label3.ForeColor = Color.FromArgb(164, 165, 169);
             label3.Location = new Point(460, 213);
             label3.Name = "label3";
-            label3.Size = new Size(66, 17);
+            label3.Size = new Size(85, 23);
             label3.TabIndex = 3;
             label3.Text = "Password";
             // 
@@ -103,7 +103,7 @@
             checkBoxShowPass.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
             checkBoxShowPass.Location = new Point(625, 275);
             checkBoxShowPass.Name = "checkBoxShowPass";
-            checkBoxShowPass.Size = new Size(113, 21);
+            checkBoxShowPass.Size = new Size(135, 25);
             checkBoxShowPass.TabIndex = 5;
             checkBoxShowPass.Text = "Show Passwod";
             checkBoxShowPass.UseVisualStyleBackColor = true;
@@ -125,7 +125,7 @@
             btnLogin.IconMarginLeft = 0;
             btnLogin.IconMarginRight = 0;
             btnLogin.IconRightVisible = false;
-            btnLogin.IconRightZoom = 10D;
+            btnLogin.IconRightZoom = 4D;
             btnLogin.IconVisible = false;
             btnLogin.IconZoom = 10D;
             btnLogin.IsTab = false;
@@ -185,7 +185,7 @@
             txtPassword.ForeColor = SystemColors.WindowFrame;
             txtPassword.Location = new Point(12, 5);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(254, 22);
+            txtPassword.Size = new Size(254, 27);
             txtPassword.TabIndex = 3;
             // 
             // elipsePassword
@@ -200,7 +200,7 @@
             // 
             // LoginFormView
             // 
-            AutoScaleDimensions = new SizeF(8F, 17F);
+            AutoScaleDimensions = new SizeF(10F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(790, 441);

@@ -1,3 +1,4 @@
+using InventoryLib.DataResponse;
 using InventoryLib.Models;
 using InventoryLib.Models.Request.Product;
 using InventoryLib.Models.Response.Product;
@@ -7,8 +8,7 @@ namespace InventoryLib.Interface;
 
 public interface IProductService : IService<ProductResponse,ProductCreateReq,ProductUpdateReq>
 {
-    //Task<Product> CreateProduct(ProductCreateReq productDetails);
-
+    public Response<string> ReActiveProduct(Key id);
     //Task<List<ProductResponse>> GetAllProducts();
 
     //Task<Product> GetProductById(Key key);

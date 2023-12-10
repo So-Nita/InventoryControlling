@@ -40,7 +40,7 @@ namespace InventoryWindowApp.View
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
-           /* var user = new UserRequest()
+            var user = new UserRequest()
             {
                 UserName = txtUsername.Text,
                 Password = txtPassword.Text,
@@ -49,10 +49,12 @@ namespace InventoryWindowApp.View
             if (data == null)
             {
                 return;
-            }*/
+            }
             //this.Close();
-            var homeview = new MainContainerView();
-            homeview.Show();
+            new LoginFormView().Close();
+            var homeView = new MainContainerView();
+            homeView.StartPosition = FormStartPosition.CenterScreen;
+            homeView.ShowDialog();
         }
 
         protected override CreateParams CreateParams

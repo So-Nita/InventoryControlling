@@ -22,6 +22,7 @@ namespace InventoryWindowApp.View
         {
             _productService = new ProductService();
             _categoryService = new CategoryService();
+            _orderService = new OrderService();
             InitializeComponent();
 
             if (panelMenuCategory != null)
@@ -63,14 +64,16 @@ namespace InventoryWindowApp.View
             var Test = new List<string>();
             try
             {
-                var products = await _productService.ReadAllAsync();
-                foreach (var product in products)
+                var products = await _productService.ReadProductSellAsync();
+                if (products.Any())
                 {
-                    Test.Add(product.Id.ToString() + product.Name);
-                    CreateProductPanel(product);
+                    foreach (var product in products)
+                    {
+                        CreateProductPanel(product);
+                    }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 throw new Exception();
             }
@@ -260,8 +263,16 @@ namespace InventoryWindowApp.View
                 priceLabel.Dock = DockStyle.Bottom;
 
                 btnProduct.Controls.Add(imagePanel);
-                var img = product.Image==""?DefaultImg: product.Image;
-                var Image = await ItemComponent.GetImageFromUrl((product.Image??DefaultImg));
+                Image Image ;
+                if(product.Image == null || product.Image=="")
+                {
+                    Image = await ItemComponent.GetImageFromUrl(DefaultImg);
+                    product.Image = DefaultImg;
+                }
+                else
+                {
+                    Image = await ItemComponent.GetImageFromUrl(product.Image!);
+                }
                 pictureBox.Image = Image;
                 imagePanel.Controls.Add(pictureBox);
 
@@ -344,19 +355,19 @@ namespace InventoryWindowApp.View
                     var orderDetail = new OrderDetail()
                     {
                         ProductId = item.Id,
-                        //-- Qty = 
+                        Qty = (int)item.Qty 
                     };
                     orderDetails.Add(orderDetail);
                 }
                 if (orderDetails.Count <= 0)
                 {
-                    CustomMessageBox.ShowMessageBox("Payment failed. Please try again", false);
+                    CustomMessageBox.ShowMessageBox("Payment failed. Please select the product", false);
                 }
                 else
                 {
                     var data = new OrderCreateReq()
                     {
-                        OrderDetails =  orderDetails
+                        OrderDetails =  orderDetails,
                     };
 
                     var result = await _orderService.Create(data);
@@ -373,7 +384,7 @@ namespace InventoryWindowApp.View
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 throw new Exception();
             }

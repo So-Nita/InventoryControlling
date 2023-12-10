@@ -7,5 +7,6 @@ namespace InventoryLib.Services
         public string Id { get; set; } = "";
         public int? Qty { get; set; }
         public StatusType? Status { get; set; }
+        public string? Note { get; set; }
     }
 }

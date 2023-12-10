@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Vrjw+p5QJ/CnjcX256PobKGUQchIS2+oAu7u4qgvzTtTeKMQDOPY+FGNEnnVTMewHKN8FeqYCb/a/ErOxPm38w==",
+  "dgSpecHash": "IaPCSCKl+79n1SWkPAg914ub+Ttxjspjgs07+UN6Dp1TNahAptDIbcbqTfZ1D4TnRVssE/3O7CdtJUKyN/nizQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Back-End.07\\Downloads\\OOAD\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj",
+  "projectFilePath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Back-End.07\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\MSI\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

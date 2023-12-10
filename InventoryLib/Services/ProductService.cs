@@ -36,6 +36,7 @@ public class ProductService : IProductService
         {
             return Response<string>.Fail("Price must be more than Cost.");
         }
+        var image = req.Image.IsNullOrEmpty() ? DefaultImage : req.Image;
         var product = new Product()
         {
             Id = Guid.NewGuid().ToString(),
@@ -43,7 +44,7 @@ public class ProductService : IProductService
             Name = req.Name,
             Price = req.Price,
             Cost = req.Cost,
-            Image = req.Image,
+            Image = image!,
             Description = req.Description,
             CategoryId = req.CategoryId,
             CreatedAt = DateTime.Now,
@@ -61,7 +62,7 @@ public class ProductService : IProductService
             return Response<string>.Fail("Failed Create Product.");
         }
     }
-    private string DefaultImage = "https://telugufoods.com/wp-content/uploads/telugufoods-biryani-masala-new.png";
+    private string DefaultImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHNXEIpQNJp1iixgogbJk5quiWkQk3MoarYQ&usqp=CAU";
 
     public Response<List<ProductResponse>> ReadAll()
     {
@@ -189,6 +190,27 @@ public class ProductService : IProductService
         {
             Console.WriteLine(e);
             return Response<string>.Fail("Failed to delete product.");
+        }
+    }
+ 
+    public Response<string> ReActiveProduct(Key key)
+    {
+        if (key == null)
+        {
+            return Response<string>.Fail("Product id is required.");
+        }
+        var product = _unitOfWork.GetRepository<Product>().GetQueryable().FirstOrDefault(e => e.Id == key.Id);
+        if (product == null) return Response<string>.NotFound("Product does not existing.");
+        try
+        {
+            product.IsDeleted = false;
+            _unitOfWork.GetRepository<Product>().Update(product);
+            _unitOfWork.Save();
+            return Response<string>.Success("Product is active Successfully");
+        }
+        catch (Exception e)
+        {
+            return Response<string>.Fail("Failed to reactive product.");
         }
     }
 }

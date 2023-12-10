@@ -1,10 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryWebApi", "InventoryWebApi\InventoryWebApi.csproj", "{BDDE06FE-BFC6-49BF-8886-A11CC920F4A1}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34316.72
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryWebApi", "InventoryWebApi\InventoryWebApi.csproj", "{BDDE06FE-BFC6-49BF-8886-A11CC920F4A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryLib", "InventoryLib\InventoryLib.csproj", "{64052BB0-FF54-49D1-953D-2203E9EA5400}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryLib", "InventoryLib\InventoryLib.csproj", "{64052BB0-FF54-49D1-953D-2203E9EA5400}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryConsole", "InventoryConsole\InventoryConsole.csproj", "{A77CD4E7-B252-469C-95C4-68809A5E1644}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryConsole", "InventoryConsole\InventoryConsole.csproj", "{A77CD4E7-B252-469C-95C4-68809A5E1644}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryWindowApp", "InventoryWindowApp\InventoryWindowApp.csproj", "{05168E26-D0AD-4FCC-83AD-E3F68D70F23D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryApiClient", "InventoryApiClient\InventoryApiClient.csproj", "{28B4D772-2908-4554-8160-9B8DC69AF62C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +31,16 @@ Global
 		{A77CD4E7-B252-469C-95C4-68809A5E1644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A77CD4E7-B252-469C-95C4-68809A5E1644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A77CD4E7-B252-469C-95C4-68809A5E1644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05168E26-D0AD-4FCC-83AD-E3F68D70F23D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05168E26-D0AD-4FCC-83AD-E3F68D70F23D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05168E26-D0AD-4FCC-83AD-E3F68D70F23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05168E26-D0AD-4FCC-83AD-E3F68D70F23D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28B4D772-2908-4554-8160-9B8DC69AF62C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B4D772-2908-4554-8160-9B8DC69AF62C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B4D772-2908-4554-8160-9B8DC69AF62C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B4D772-2908-4554-8160-9B8DC69AF62C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

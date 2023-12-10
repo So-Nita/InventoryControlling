@@ -12,6 +12,7 @@ using static Azure.Core.HttpHeader;
 using System.Numerics;
 using InventoryLib.UnitOfWork;
 using System.Diagnostics;
+using Microsoft.IdentityModel.Tokens;
 
 namespace InventoryLib.Services
 {
@@ -110,6 +111,7 @@ namespace InventoryLib.Services
                                  {
                                      Id = s.Id,
                                      ProductId = s.ProductId,
+                                     ProductName = e.Name,
                                      Qty = s.Qty,
                                      Status = s.Status.ToString(),
                                      Note = s.Note,
@@ -143,6 +145,7 @@ namespace InventoryLib.Services
                                 {
                                     Id = s.Id,
                                     ProductId = s.ProductId,
+                                    ProductName = e.Name,
                                     Qty = s.Qty,
                                     Status = s.Status.ToString(),
                                     Note = s.Note,
@@ -169,6 +172,7 @@ namespace InventoryLib.Services
 
                 stock.Qty = req.Qty ?? stock.Qty;  
                 stock.Status = req.Status ?? stock.Status;  
+                stock.Note = (req.Note==""||req.Note.IsNullOrEmpty()) ? stock.Note : req.Note;
 
                 var product = _unitWork.GetRepository<Product>().GetById(stock.ProductId);
 
@@ -178,6 +182,7 @@ namespace InventoryLib.Services
 
                 int totalQty = stockTransactions.Sum(s => s.Qty * (s.Status == StatusType.StockIn ? 1 : -1));
                 product.Qty = totalQty;
+                
 
                 _unitWork.GetRepository<Stocking>().Update(stock);
                 _unitWork.GetRepository<Product>().Update(product);

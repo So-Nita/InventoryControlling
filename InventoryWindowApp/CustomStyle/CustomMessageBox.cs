@@ -1,58 +1,64 @@
-﻿using InventoryWindowApp.Properties;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Timer = System.Windows.Forms.Timer;
 
 namespace InventoryWindowApp.CustomStyle
 {
     public partial class CustomMessageBox : Form
     {
-         
+        private readonly Timer timer = new Timer();
+        private readonly string successImg = "https://www.vidhyarthidarpan.com/public/images/success.gif";
+        private readonly string failImg = "https://cdn.dribbble.com/users/251873/screenshots/9388228/error-img.gif";
+
         public CustomMessageBox(string message, bool isFail)
         {
             InitializeComponent();
+            InitTitle(message, isFail);
             InitDelay();
-            InitTitle(message,isFail);
-            
+            FormBorderStyle = FormBorderStyle.None; // Set border style to None
+            Paint += CustomMessageBox_Paint;
         }
-        public static void ShowMessageBox(string message/*, Color txtColor*/, bool ifFailed)
+
+        public static void ShowMessageBox(string message, bool ifFailed)
         {
             using (var form = new CustomMessageBox(message, ifFailed))
             {
                 form.ShowDialog();
             }
         }
+
         private void InitDelay()
         {
-            icon_delay.Start();
-            icon.Enabled = true;
-        }
-        private void icon_delay_Tick(object sender, EventArgs e)
-        {
-            icon.Enabled = false;
-            icon_delay.Stop();
+            // Set the timer interval to 5000 milliseconds (5 seconds)
+            timer.Interval = 5000;
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
 
-        private void InitTitle(string message,bool checkfail)
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // Close the form when the timer ticks
+            this.Close();
+        }
+
+        private async void InitTitle(string message, bool checkFail)
         {
             lableMessage.Text = message;
-            if(!checkfail)
+            if (!checkFail)
             {
-                icon.Image = (Image)resources.GetObject("icon.Image")!;
+                icon.Image = await ItemComponent.GetImageFromUrl(failImg);
             }
-            icon.Image = (Image)resources.GetObject("icon.Image")!;
+            icon.Image = await ItemComponent.GetImageFromUrl(successImg);
         }
-
 
         private void btnOkay_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void CustomMessageBox_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(new Pen(Color.DarkGray, 10), e.ClipRectangle);
         }
 
     }

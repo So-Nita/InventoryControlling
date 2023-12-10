@@ -12,10 +12,10 @@ namespace InventoryWindowApp
         {
             ApplicationConfiguration.Initialize();
 
-            //Application.Run(new MainContainerView());
+            Application.Run(new MainContainerView());
 
             //Application.Run(new HomeView());
-            Application.Run(new LoginFormView());
+            //Application.Run(new LoginFormView());
 
             //Application.Run(new CustomMessageBox("Successfully",true));
         }

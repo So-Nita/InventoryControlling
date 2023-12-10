@@ -53,6 +53,8 @@ namespace InventoryConsole
                 new Menu() { Title = "Menu Category", Action = () => _helper.PerformCrudOperations(EndPoint.category) },
                 new Menu() { Title = "Menu Stocking", Action = () => _helper.PerformCrudOperations(EndPoint.stocking) },
                 new Menu() { Title = "Menu Order Summary", Action = () => _helper.PerformCrudOperations(EndPoint.order) },
+                new Menu() { Title = "Menu Product Price Update Summary", Action = () => _helper.PerformCrudOperations(EndPoint.pricehistory) },
+
                 new Menu() { Title = "Log Out", Action = _helper.Logout }
             };
         }
@@ -65,6 +67,8 @@ namespace InventoryConsole
                 new Menu() { Title = "Menu Category", Action = () => _helper.PerformReadOperation(EndPoint.category) },
                 new Menu() { Title = "Menu Stocking", Action = () => _helper.PerformReadOperation(EndPoint.stocking) },
                 new Menu() { Title = "Menu Order Summary", Action = () => _helper.PerformCrudOperations(EndPoint.order) },
+                new Menu() { Title = "Menu Product Price Update Summary", Action = () => _helper.PerformCrudOperations(EndPoint.pricehistory) },
+
                 new Menu() { Title = "Log Out", Action = _helper.Exit }
             };
         }

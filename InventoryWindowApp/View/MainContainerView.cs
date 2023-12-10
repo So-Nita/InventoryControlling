@@ -1,4 +1,5 @@
 ﻿using InventoryApiClient.Services;
+using InventoryWindowApp.View.Component;
 using POSDesignDemo.View;
 using System;
 using System.Collections.Generic;
@@ -77,6 +78,7 @@ namespace InventoryWindowApp.View
             panelDesktop.Controls.Add(form);
             form.Show();
         }
+
         private void btnHomeMenu_Click(object sender, EventArgs e)
         {
             AddControlls(new HomeView());
@@ -103,15 +105,31 @@ namespace InventoryWindowApp.View
         private void btnSignOut_Click(object sender, EventArgs e)
         {
             this.Close();
-            /*var loginForm = new FormLogin();
+            var loginForm = new LoginFormView();
             loginForm.StartPosition = FormStartPosition.CenterScreen;
-            loginForm.ShowDialog();*/
+            loginForm.ShowDialog();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             formSize = this.ClientSize;
         }
 
+        #region Menu: Stocking 
+        private void btnMenu1_Click(object sender, EventArgs e)
+        {
+            ShowSubMenu(panelIventorySubMenu);
+        }
+        private void btnProductSub_Click(object sender, EventArgs e)
+        {
+            hideSubMenu();
+            AddControlls(new StockingView());
+        }
+        private void btnStockPurSub_Click(object sender, EventArgs e)
+        {
+            hideSubMenu();
+        }
+
+        #endregion
         //Drag Form
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -203,18 +221,18 @@ namespace InventoryWindowApp.View
             const int resizeAreaSize = 10;
             #region Form Resize
             // Resize/WM_NCHITTEST values
-            const int HTCLIENT = 1;  
-            const int HTLEFT = 10;   
-            const int HTRIGHT = 11; 
-            const int HTTOP = 12;    
-            const int HTTOPLEFT = 13; 
-            const int HTTOPRIGHT = 14; 
-            const int HTBOTTOM = 15;  
-            const int HTBOTTOMLEFT = 16; 
-            const int HTBOTTOMRIGHT = 17; 
+            const int HTCLIENT = 1;
+            const int HTLEFT = 10;
+            const int HTRIGHT = 11;
+            const int HTTOP = 12;
+            const int HTTOPLEFT = 13;
+            const int HTTOPRIGHT = 14;
+            const int HTBOTTOM = 15;
+            const int HTBOTTOMLEFT = 16;
+            const int HTBOTTOMRIGHT = 17;
 
             if (m.Msg == WM_NCHITTEST)
-            {  
+            {
                 base.WndProc(ref m);
                 if (this.WindowState == FormWindowState.Normal)//Resize the form if it is in normal state
                 {
@@ -270,49 +288,8 @@ namespace InventoryWindowApp.View
         }
 
 
-        #region Menu: Iventory
-        private void btnMenu1_Click(object sender, EventArgs e)
-        {
-            ShowSubMenu(panelIventorySubMenu);
-        }
-        private void btnProductSub_Click(object sender, EventArgs e)
-        {
-            hideSubMenu();
-        }
-        private void btnStockPurSub_Click(object sender, EventArgs e)
-        {
-            hideSubMenu();
-        }
-        private void btnProductExpSub_Click(object sender, EventArgs e)
-        {
-            hideSubMenu();
-        }
-        private void btnSupplierSub_Click(object sender, EventArgs e)
-        {
-            hideSubMenu();
-            //AddControlls(new SupplierView());
-        }
-        #endregion
+        
 
-
-        #region Menu : Purchase Order
-        private void btnPurchaseOrdSub_Click(object sender, EventArgs e)
-        {
-            ShowSubMenu(panelPurOrdSubMenu);
-        }
-        private void btnPurCreateSub_Click(object sender, EventArgs e)
-        {
-            hideSubMenu();
-        }
-        private void btnPurfilterSub_Click(object sender, EventArgs e)
-        {
-            hideSubMenu();
-        }
-        private void btnPurSumSub_Click(object sender, EventArgs e)
-        {
-            hideSubMenu();
-        }
-        #endregion
 
 
 

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Back-End.07\\Downloads\\OOAD\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj": {}
+    "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Back-End.07\\Downloads\\OOAD\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj": {
+    "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Back-End.07\\Downloads\\OOAD\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj",
+        "projectUniqueName": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj",
         "projectName": "InventoryApiClient",
-        "projectPath": "C:\\Users\\Back-End.07\\Downloads\\OOAD\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj",
-        "packagesPath": "C:\\Users\\Back-End.07\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Back-End.07\\Downloads\\OOAD\\InventoryControlling\\InventoryApiClient\\obj\\",
+        "projectPath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj",
+        "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
+        "outputPath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryApiClient\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Back-End.07\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

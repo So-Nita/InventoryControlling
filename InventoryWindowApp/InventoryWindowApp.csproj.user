@@ -10,7 +10,19 @@
     <Compile Update="View\CategoryView.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="View\Component\CategoryCompnentView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\Component\CreateStockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="View\Component\ProductComponentView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\StockingView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\Component\StockComonentView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="View\HomeView.cs">

@@ -1,7 +1,12 @@
+using InventoryApiClient.Model.Category;
+using InventoryApiClient.Model.Order;
+using InventoryApiClient.Model.Product;
+using InventoryApiClient.Model.Stocking;
 using InventoryApiClient.Model.User;
 using InventoryApiClient.Services;
 using InventoryConsole.Helpers;
 using InventoryConsole.Menues;
+using System;
 
 namespace InventoryConsole
 {
@@ -11,6 +16,7 @@ namespace InventoryConsole
         private readonly MenuManager _menuManager;
         private readonly ProductService _productService;
         private readonly CategoryService _categoryService;
+        private readonly OrderService _orderService;
 
         private readonly MenuList crudMenu = new MenuList();
 
@@ -20,6 +26,7 @@ namespace InventoryConsole
             _menuManager = new MenuManager(this);
             _productService = productService;
             _categoryService = categoryService;
+            _orderService = orderService;
             //_userManager.Login();  
         }
 
@@ -41,7 +48,7 @@ namespace InventoryConsole
         {
             Environment.Exit(0);
         }
-        
+
         public void PerformCrudOperations(EndPoint entity)
         {
             Console.WriteLine($"=> {entity} CRUD operations: <=");
@@ -72,6 +79,9 @@ namespace InventoryConsole
                     break;
                 case EndPoint.order:
                     crudMenu.Menues = GetOrderCrudMenu();
+                    break;
+                case EndPoint.pricehistory:
+                    crudMenu.Menues = GetPriceCrudMenu();
                     break;
             }
             crudMenu.Menues.Last().Action = _menuManager.DisplayMainMenu;
@@ -114,10 +124,18 @@ namespace InventoryConsole
         {
             return new List<Menu>
             {
-                new Menu() { Title = "View Product in Stock", Action = () => PerformReadOperation(EndPoint.stocking) },
+                new Menu() { Title = "View Stock Transation", Action = () => PerformReadOperation(EndPoint.stocking) },
                 new Menu() { Title = "Create Stock", Action = () => PerformCreateOperation(EndPoint.stocking) },
                 new Menu() { Title = "Update Stock", Action = () => PerformUpdateOperation(EndPoint.stocking) },
                 new Menu() { Title = "Delete Stock", Action = () => PerformDeleteOperation(EndPoint.stocking) },
+                new Menu() { Title = "Back to Main Menu", Action = _menuManager.DisplayMainMenu }
+            };
+        }
+        private List<Menu> GetPriceCrudMenu()
+        {
+            return new List<Menu>
+            {
+                new Menu() { Title = "View Product Price", Action = () => PerformReadOperation(EndPoint.pricehistory) },
                 new Menu() { Title = "Back to Main Menu", Action = _menuManager.DisplayMainMenu }
             };
         }
@@ -135,52 +153,63 @@ namespace InventoryConsole
                     break;
                 case EndPoint.stocking:
                     Console.WriteLine("Viewing Stocking Information");
+                    DisplayStockings();
                     break;
                 case EndPoint.order:
                     Console.WriteLine("Viewing Order Summary");
+                    DisplaySaleOrders();
+                    break;
+                case EndPoint.pricehistory:
+                    DisplayProductPriceHistoryAsync();
+                    Console.WriteLine("Viewing Product's price history");
                     break;
                 default:
                     Console.WriteLine("Invalid entity.");
                     break;
             }
         }
-        
+
         private void PerformCreateOperation(EndPoint entity)
         {
             switch (entity)
             {
                 case EndPoint.product:
                     Console.WriteLine("Creating a Product");
+                    DisplayCreateProducts();
                     break;
                 case EndPoint.category:
                     Console.WriteLine("Creating a Category");
+                    DisplayCreateCategory();
                     break;
                 case EndPoint.stocking:
                     Console.WriteLine("Updating Stocking Information");
+                    DisplayCreateStock();
                     break;
                 case EndPoint.order:
                     Console.WriteLine("Creating an Order");
+                    DisplayCreateOrder();
                     break;
                 default:
                     Console.WriteLine("Invalid entity.");
                     break;
             }
         }
+        //Update
         private void PerformUpdateOperation(EndPoint entity)
         {
             switch (entity)
             {
                 case EndPoint.product:
-                    Console.WriteLine("Updating a Product");
+                    DisplayUpdateProduct();
                     break;
                 case EndPoint.category:
-                    Console.WriteLine("Updating a Category");
+                    DisplayUpdateCategory();
                     break;
                 case EndPoint.stocking:
-                    Console.WriteLine("Updating Stocking Information");
+                    DisplayUpdateStocking();
                     break;
-                case EndPoint.order:
-                    Console.WriteLine("Updating an Order");
+               /* case EndPoint.order:
+                    DisplayUpdateOrder();*/
                     break;
                 default:
                     Console.WriteLine("Invalid entity.");
@@ -193,43 +222,348 @@ namespace InventoryConsole
             switch (entity)
             {
                 case EndPoint.product:
-                    Console.WriteLine("Deleting a Product");
+                    DisplayDeleteProduct();
                     break;
                 case EndPoint.category:
-                    Console.WriteLine("Deleting a Category");
+                    DisplayDeleteCategory();
                     break;
                 case EndPoint.stocking:
-                    Console.WriteLine("Deleting Stocking Information");
+                    DisplayDeleteStocking();
                     break;
                 case EndPoint.order:
-                    Console.WriteLine("Deleting an Order");
+                    DisplayDeleteOrder();
                     break;
                 default:
                     Console.WriteLine("Invalid entity.");
                     break;
             }
         }
+        //Delete 
+        private async void DisplayDeleteProduct()
+        {
+            Console.Write("Enter product ID to delete: "); var productId = Console.ReadLine();
+            var result = await _productService.DeleteAsync(productId);
+            Console.WriteLine(result == true ? "Delete Successfully" : "Faled to delete.");
+        }
+        private async void DisplayDeleteCategory()
+        {
+            Console.Write("Enter category ID to delete: "); var categoryId = Console.ReadLine();
+            var result = await _categoryService.DeleteAsync(categoryId);
+            Console.WriteLine(result == true ? "Delete Successfully" : "Faled to delete.");
+        }
+        private async void DisplayDeleteStocking()
+        {
+            Console.Write("Enter stocking ID to delete: "); var stockId = Console.ReadLine();
+            var stock = new StockingService();
+            var result = await stock.DeleteAsync(stockId);
+            Console.WriteLine(result == true ? "Delete Successfully" : "Faled to delete.");
+        }
+        private async void DisplayDeleteOrder()
+        {
+            Console.Write("Enter order ID to delete: "); var orderId = Console.ReadLine();
+            var result = await _orderService.DeleteAsync(orderId);
+            Console.WriteLine(result == true ? "Delete Successfully" : "Faled to delete.");
+        }
+
+        // Update 
+        private async void DisplayUpdateProduct()
+        {
+            var product = new ProductUpdateReq();
+            Console.Write("Enter product ID to update: "); product.Id = Console.ReadLine();
+            Console.Write("Enter new product code: ");  product.Code = Console.ReadLine();
+            Console.Write("Enter new product name: ");
+            product.Name = Console.ReadLine();
+
+            Console.Write("Enter new product cost: ");
+            if (decimal.TryParse(Console.ReadLine(), out decimal cost))
+            {
+                product.Cost = cost;
+            }
+            else
+            {
+                Console.WriteLine("Invalid input for cost. Exiting...");
+                return;
+            }
+
+            Console.Write("Enter new product price: ");
+            if (decimal.TryParse(Console.ReadLine(), out decimal price))
+            {
+                product.Price = price;
+            }
+            else
+            {
+                Console.WriteLine("Invalid input for price. Exiting...");
+                return;
+            }
+            Console.Write("Enter new category ID: "); product.CategoryId = Console.ReadLine();
+            Console.Write("Enter new product image URL (optional): "); product.Image = Console.ReadLine();
+            Console.Write("Enter new product description (optional): "); product.Description = Console.ReadLine();
+            var result = await _productService.UpdateAsync(product);
+            Console.WriteLine(result.Status == 200 ? "Update Successfully" : "Faled to Update.");
+        }
+        private async void DisplayUpdateCategory()
+        {
+            var category = new CategoryUpdateReq();
+
+            Console.Write("Enter category ID to update: "); category.Id = Console.ReadLine();
+            Console.Write("Enter new category name: "); category.Name = Console.ReadLine();
+            Console.Write("Enter new category image URL (optional): "); category.Image = Console.ReadLine();
+            Console.Write("Enter new category description (optional): "); category.Description = Console.ReadLine();
+            var result = await _categoryService.UpdateAsync(category);
+
+            Console.WriteLine(result ? "Update Successfully" : "Failed to Update.");
+        }
+        private async void DisplayUpdateStocking()
+        {
+            var stock = new StockUpdateReq();
+            Console.Write("Enter stock ID to update: "); stock.Id = Console.ReadLine();
+            Console.Write("Enter new stock quantity (optional): ");
+            if (int.TryParse(Console.ReadLine(), out int qty))
+            {
+                stock.Qty = qty;
+            }
+            Console.Write("Enter new stock status (optional): ");   stock.Status = Console.ReadLine();
+            Console.Write("Enter new stock note (optional): ");  stock.Note = Console.ReadLine();
+            var _stock = new StockingService();
+            var result = await _stock.UpdateAsync(stock);
+
+            Console.WriteLine(result.Status == 200 ? "Update Successfully" : "Failed to Update.");
+        }
+
+
+        // Create Date 
+        private async void DisplayCreateProducts()
+        {
+            var newProduct = new ProductCreateReq();
+            Console.Write("Enter product code: "); newProduct.Code = Console.ReadLine();
+            Console.Write("Enter product name: "); newProduct.Name = Console.ReadLine();
+            Console.Write("Enter product cost: ");
+            if (decimal.TryParse(Console.ReadLine(), out decimal cost))
+            {
+                newProduct.Cost = cost;
+            }
+            else
+            {
+                Console.WriteLine("Invalid input for cost. Exiting...");
+                return;
+            }
+            Console.Write("Enter product price: ");
+            if (decimal.TryParse(Console.ReadLine(), out decimal price))
+            {
+                newProduct.Price = price;
+            }
+            else
+            {
+                Console.WriteLine("Invalid input for price. Exiting...");
+                return;
+            }
+            Console.Write("Enter category ID: "); newProduct.CategoryId = Console.ReadLine();
+            Console.Write("Enter product image URL (optional): "); newProduct.Image = Console.ReadLine();
+            if (newProduct.Image == "")
+            {
+                newProduct.Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBVm97ffff3JtR09e4xkkjys5SXrlPv3coTQ&usqp=CAU";
+            }
+            Console.Write("Enter product description (optional): ");  newProduct.Description = Console.ReadLine();
+
+            var result = await _productService.CreateAsync(newProduct);
+            if (result.Equals(200))
+            {
+                Console.WriteLine("\nCreate Product Successfully.");
+            }
+            else
+            {
+                Console.WriteLine($"\nSomething Went wrong. Error: {result}");
+            }
+        }
+
+        private async void DisplayCreateCategory()
+        {
+            var newCategory = new CategoryCreateReq();
+            Console.Write("Enter category name: "); newCategory.Name = Console.ReadLine();
+
+            Console.Write("Enter category image URL (optional): "); newCategory.Image = Console.ReadLine();
+
+            Console.Write("Enter category description (optional): "); newCategory.Description = Console.ReadLine();
+
+            var result = await _categoryService.CreateAsync(newCategory);
+            if (result ==true)
+            {
+                Console.WriteLine("\nCreate Category Successfully.");
+            }
+            else
+            {
+                Console.WriteLine($"\nSomething Went wrong. Error: {result}");
+            }
+        }
+
+        private async void DisplayCreateStock()
+        {
+            var stock = new StockCreateReq();
+
+            Console.Write("Enter Stock ID: "); stock.Id = Console.ReadLine();
+
+            Console.Write("Enter Status: "); stock.Status = Console.ReadLine();
+
+            Console.Write("Enter Quantity: ");
+            if (int.TryParse(Console.ReadLine(), out int qty))
+            {
+                stock.Qty = qty;
+            }
+            else
+            {
+                Console.WriteLine("Invalid quantity. Please enter a valid numeric value.");
+                return;
+            }
+            Console.Write("Enter Note (optional): ");
+            stock.Note = Console.ReadLine();
+            var stocking = new StockingService();
+            var result = await stocking.CreateAsync(stock);
+
+            if (result.Status == 200)
+            {
+                Console.WriteLine("\nCreate Stock Successfully.");
+            }
+            else
+            {
+                Console.WriteLine($"\nSomething went wrong. Error: {result}");
+            }
+        }
+
+        private async void DisplayCreateOrder()
+        {
+            var order = new OrderCreateReq();
+            var _order = new OrderService();
+
+            while (true)
+            {
+                var orderDetail = new OrderDetail();
+
+                Console.Write("Enter Product ID (or 0 to submit order): "); string productIdInput = Console.ReadLine();
+
+                if (productIdInput == "0") { break; }
+ 
+                orderDetail.ProductId = productIdInput;  Console.Write("Enter Quantity: ");
+                if (int.TryParse(Console.ReadLine(), out int qty))
+                {
+                    orderDetail.Qty = qty;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid quantity. Please enter a valid numeric value.");
+                    return;
+                }
+
+                order.OrderDetails.Add(orderDetail);
+            }
+            var result = await _order.Create(order);
+
+            if (result == true)
+            {
+                Console.WriteLine("\nCreate Order Successfully.");
+            }
+            else
+            {
+                Console.WriteLine($"\nSomething went wrong. Error: {result}");
+            }
+        }
+
+
 
         // Read Data 
         public void DisplayProducts()
         {
             var products = _productService.ReadAllAsync().Result;
-            Console.WriteLine("\n====== Product List ======");
-            foreach (var product in products)
+            Console.WriteLine("\n================================================================================================ Product List =================================================================================================");
+            Console.WriteLine("\n{0,-38} {1,-15} {2,-20} {3,-38} {4,-15} {5,-10} {6,-10} {7,-22} {8,-15}",
+                              " ID", "Code", "Name", "CategoryId", "CategoryName", "Cost", "Price", "CreatedAt", "Description");
+            Console.WriteLine("\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+            if(products != null)
             {
-                Console.WriteLine($"ID: {product.Id}, Name: {product.Name}, Price: {product.Price}");
+                foreach (var product in products)
+                {
+                    Console.WriteLine($" {product.Id,-38} {product.Code,-15} {product.Name,-20} {product.CategoryId,-38} {product.CategoryName,-15} " +
+                                      $" {product.Cost,-10:C} {product.Price,-10:C} {product.CreatedAt?.ToString("MM/dd/yyyy HH:mm:ss"),-22} {product.Description,-15}");
+                }
             }
-            Console.WriteLine("===========================\n");
+            Console.WriteLine("\n===============================================================================================================================================================================================================\n");
         }
+
         public void DisplayCategories()
         {
-            var products = _categoryService.ReadAllAsync().Result;
-            Console.WriteLine("\n====== Product List ======");
-            foreach (var product in products)
+            var categories = _categoryService.ReadAllAsync().Result;
+            Console.WriteLine("\n=================================== Category List ====================================");
+            Console.WriteLine("\n{0,-38} {1,-15} {2,-20}",
+                              "ID", "Name", "Description");
+            Console.WriteLine("\n--------------------------------------------------------------------------------------\n");
+            if (categories.Any())
             {
-                Console.WriteLine($"ID: {product.Id}, Name: {product.Name}, Price: {product.Description}");
+                foreach (var item in categories)
+                {
+                    Console.WriteLine($" {item.Id,-38} {item.Name,-15} {item.Description,-20}");
+                }
+
             }
-            Console.WriteLine("===========================\n");
+            Console.WriteLine("\n======================================================================================\n");
         }
+
+        private async Task DisplayProductPriceHistoryAsync()
+        {
+            var prices = new PriceHistoryService();
+            var data = await prices.ReadAllAsync();
+            Console.WriteLine("\n=================================================================== Price History List ======================================================================");
+            Console.WriteLine("\n{0,-38} {1,-38} {2,-20} {3,-20} {4,-22}",
+                              "ID", "ProductId", "OldPrice", "CurrentPrice", "UpdateDate");
+            Console.WriteLine("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+            if (data != null)
+            {
+                foreach (var item in data)
+                {
+                    Console.WriteLine($" {item.Id,-38} {item.ProductId,-38} {item.OldPrice,-20:C} {item.CurrentPrice,-20:C} {item.UpdateDate,-22:MM/dd/yyyy HH:mm:ss}");
+                }
+            }
+            Console.WriteLine("\n=============================================================================================================================================================\n");
+        }
+        private async void DisplaySaleOrders()
+        {
+            var _order = new OrderService();
+            var orders = await _order.ReadAllAsync();
+            Console.WriteLine("\n=============================================Order List===================================================");
+            Console.WriteLine("\nOrderID, \t\t\t\tTotalPrice \t\tOrderDate");
+            Console.WriteLine("\n----------------------------------------------------------------------------------------------------------\n");
+
+            if (orders!=null)
+            {
+                foreach (var order in orders)
+                {
+                    Console.WriteLine($" {order.Id,-38} {order.TotalPrice,-15} {order.OrderDate,-20}");
+                }
+            }
+
+            Console.WriteLine("\n==========================================================================================================\n");
+        }
+
+
+
+
+        private async void DisplayStockings()
+        {
+            var prices = new PriceHistoryService();
+            var data = await prices.ReadAllAsync();
+            Console.WriteLine("\n=================================================================== Price History List ======================================================================");
+            Console.WriteLine("\n{0,-38} {1,-38} {2,-20} {3,-20} {4,-22}",
+                              "ID", "ProductId", "OldPrice", "CurrentPrice", "UpdateDate");
+            Console.WriteLine("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+            if (data != null)
+            {
+                foreach (var item in data)
+                {
+                    Console.WriteLine($" {item.Id,-38} {item.ProductId,-38} {item.OldPrice,-20:C} {item.CurrentPrice,-20:C} {item.UpdateDate,-22:MM/dd/yyyy HH:mm:ss}");
+                }
+            }
+            Console.WriteLine("\n=============================================================================================================================================================\n");
+        }
+
     }
 }
