@@ -58,9 +58,9 @@ namespace InventoryWindowApp.CustomStyle
                 var stream = new MemoryStream(imageBytes);
                 return Image.FromStream(stream);
             }
-            catch (Exception ex)
+            catch  
             {
-                throw new Exception(ex.Message);
+                return await GetImageFromUrl("https://cdn.spinn.com/assets/img/empty.jpeg");
             }
         }
 

@@ -44,9 +44,11 @@
             txtPassword = new TextBox();
             elipsePassword = new Bunifu.Framework.UI.BunifuElipse(components);
             bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse(components);
+            materialCard1 = new ReaLTaiizor.Controls.MaterialCard();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelUsername.SuspendLayout();
             panelPassword.SuspendLayout();
+            materialCard1.SuspendLayout();
             SuspendLayout();
             // 
             // bunifuElipse1
@@ -59,9 +61,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Arial Rounded MT Bold", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.CornflowerBlue;
-            label1.Location = new Point(547, 56);
+            label1.Location = new Point(535, 40);
             label1.Name = "label1";
-            label1.Size = new Size(119, 39);
+            label1.Size = new Size(93, 32);
             label1.TabIndex = 0;
             label1.Text = "Log in";
             // 
@@ -69,9 +71,9 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.FromArgb(164, 165, 169);
-            label2.Location = new Point(460, 118);
+            label2.Location = new Point(448, 102);
             label2.Name = "label2";
-            label2.Size = new Size(89, 23);
+            label2.Size = new Size(69, 17);
             label2.TabIndex = 1;
             label2.Text = "Username";
             // 
@@ -79,20 +81,20 @@
             // 
             txtUsername.BackColor = SystemColors.ButtonFace;
             txtUsername.BorderStyle = BorderStyle.None;
-            txtUsername.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtUsername.Font = new Font("Segoe UI", 11.5F, FontStyle.Regular, GraphicsUnit.Point);
             txtUsername.ForeColor = SystemColors.WindowFrame;
-            txtUsername.Location = new Point(12, 5);
+            txtUsername.Location = new Point(8, 6);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(254, 27);
+            txtUsername.Size = new Size(254, 21);
             txtUsername.TabIndex = 2;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.FromArgb(164, 165, 169);
-            label3.Location = new Point(460, 213);
+            label3.Location = new Point(448, 197);
             label3.Name = "label3";
-            label3.Size = new Size(85, 23);
+            label3.Size = new Size(66, 17);
             label3.TabIndex = 3;
             label3.Text = "Password";
             // 
@@ -101,9 +103,9 @@
             checkBoxShowPass.AutoSize = true;
             checkBoxShowPass.Cursor = Cursors.Hand;
             checkBoxShowPass.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            checkBoxShowPass.Location = new Point(625, 275);
+            checkBoxShowPass.Location = new Point(613, 259);
             checkBoxShowPass.Name = "checkBoxShowPass";
-            checkBoxShowPass.Size = new Size(135, 25);
+            checkBoxShowPass.Size = new Size(113, 21);
             checkBoxShowPass.TabIndex = 5;
             checkBoxShowPass.Text = "Show Passwod";
             checkBoxShowPass.UseVisualStyleBackColor = true;
@@ -125,18 +127,18 @@
             btnLogin.IconMarginLeft = 0;
             btnLogin.IconMarginRight = 0;
             btnLogin.IconRightVisible = false;
-            btnLogin.IconRightZoom = 4D;
+            btnLogin.IconRightZoom = 0D;
             btnLogin.IconVisible = false;
-            btnLogin.IconZoom = 10D;
+            btnLogin.IconZoom = 0D;
             btnLogin.IsTab = false;
-            btnLogin.Location = new Point(460, 329);
+            btnLogin.Location = new Point(447, 313);
             btnLogin.Margin = new Padding(0, 3, 5, 3);
             btnLogin.Name = "btnLogin";
             btnLogin.Normalcolor = Color.CornflowerBlue;
             btnLogin.OnHovercolor = Color.FromArgb(77, 136, 255);
             btnLogin.OnHoverTextColor = Color.White;
             btnLogin.selected = false;
-            btnLogin.Size = new Size(261, 38);
+            btnLogin.Size = new Size(229, 34);
             btnLogin.TabIndex = 0;
             btnLogin.Text = "LOGIN";
             btnLogin.TextAlign = ContentAlignment.MiddleCenter;
@@ -147,7 +149,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.Img_LogIn;
-            pictureBox1.Location = new Point(40, 42);
+            pictureBox1.Location = new Point(29, 40);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(389, 348);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -158,9 +160,9 @@
             // 
             panelUsername.BackColor = SystemColors.ButtonFace;
             panelUsername.Controls.Add(txtUsername);
-            panelUsername.Location = new Point(460, 147);
+            panelUsername.Location = new Point(448, 131);
             panelUsername.Name = "panelUsername";
-            panelUsername.Size = new Size(272, 33);
+            panelUsername.Size = new Size(272, 35);
             panelUsername.TabIndex = 7;
             // 
             // elipseUsername
@@ -172,9 +174,9 @@
             // 
             panelPassword.BackColor = SystemColors.ButtonFace;
             panelPassword.Controls.Add(txtPassword);
-            panelPassword.Location = new Point(460, 239);
+            panelPassword.Location = new Point(448, 223);
             panelPassword.Name = "panelPassword";
-            panelPassword.Size = new Size(272, 33);
+            panelPassword.Size = new Size(272, 35);
             panelPassword.TabIndex = 8;
             // 
             // txtPassword
@@ -183,9 +185,9 @@
             txtPassword.BorderStyle = BorderStyle.None;
             txtPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             txtPassword.ForeColor = SystemColors.WindowFrame;
-            txtPassword.Location = new Point(12, 5);
+            txtPassword.Location = new Point(8, 5);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(254, 27);
+            txtPassword.Size = new Size(254, 22);
             txtPassword.TabIndex = 3;
             // 
             // elipsePassword
@@ -198,20 +200,34 @@
             bunifuElipse2.ElipseRadius = 5;
             bunifuElipse2.TargetControl = this;
             // 
+            // materialCard1
+            // 
+            materialCard1.BackColor = Color.FromArgb(255, 255, 255);
+            materialCard1.Controls.Add(label2);
+            materialCard1.Controls.Add(panelPassword);
+            materialCard1.Controls.Add(label1);
+            materialCard1.Controls.Add(panelUsername);
+            materialCard1.Controls.Add(label3);
+            materialCard1.Controls.Add(pictureBox1);
+            materialCard1.Controls.Add(checkBoxShowPass);
+            materialCard1.Controls.Add(btnLogin);
+            materialCard1.Depth = 0;
+            materialCard1.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            materialCard1.Location = new Point(23, 23);
+            materialCard1.Margin = new Padding(14);
+            materialCard1.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            materialCard1.Name = "materialCard1";
+            materialCard1.Padding = new Padding(14);
+            materialCard1.Size = new Size(765, 415);
+            materialCard1.TabIndex = 9;
+            // 
             // LoginFormView
             // 
-            AutoScaleDimensions = new SizeF(10F, 21F);
+            AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(790, 441);
-            Controls.Add(panelPassword);
-            Controls.Add(panelUsername);
-            Controls.Add(pictureBox1);
-            Controls.Add(btnLogin);
-            Controls.Add(checkBoxShowPass);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            ClientSize = new Size(811, 463);
+            Controls.Add(materialCard1);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             ForeColor = Color.FromArgb(164, 165, 169);
             FormBorderStyle = FormBorderStyle.None;
@@ -223,8 +239,9 @@
             panelUsername.PerformLayout();
             panelPassword.ResumeLayout(false);
             panelPassword.PerformLayout();
+            materialCard1.ResumeLayout(false);
+            materialCard1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -243,5 +260,6 @@
         private Bunifu.Framework.UI.BunifuElipse elipsePassword;
         private TextBox txtPassword;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse2;
+        private ReaLTaiizor.Controls.MaterialCard materialCard1;
     }
 }

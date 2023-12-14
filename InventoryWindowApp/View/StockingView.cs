@@ -30,16 +30,16 @@ namespace InventoryWindowApp.View.Component
         {
             List<Tuple<string, int>> columns = new List<Tuple<string, int>>
             {
-                Tuple.Create("ID",320),
-                Tuple.Create("ProductId",320),
-                Tuple.Create("Name", 200),
-                Tuple.Create("Quantity", 120),
+                Tuple.Create("ID",200),
+                Tuple.Create("Quantity", 300),
+                Tuple.Create("Name", 230),
+                Tuple.Create("Quantity", 80),
                 Tuple.Create("Status", 120),
                 Tuple.Create("Note", 150),
                 Tuple.Create("", 70),
                 Tuple.Create("", 70),
             };
-            ItemComponent.SetupDefaultDataGridView(dataGridViewStock, columns!, ClickUpdateOrDelete, 70);
+            ItemComponent.SetupDefaultDataGridView(dataGridViewStock, columns!, ClickUpdateOrDelete, 65);
         }
 
 
@@ -53,14 +53,14 @@ namespace InventoryWindowApp.View.Component
                     foreach (var stock in stocks)
                     {
 
-                        var index = dataGridViewStock.Rows.Add(stock.Id, stock.ProductId, stock.ProductName, stock.Qty, stock.Status, stock.Note);
+                        var index = dataGridViewStock.Rows.Add(stock.TransactionDate, stock.Id,stock.ProductName, stock.Qty, stock.Status, stock.Note);
 
                         DataGridViewButtonCell btnUpdate = ItemComponent.CreateButtonSubstract("Update");
-                        btnUpdate.Style.Padding = new Padding(2, 16, 0, 16);
+                        btnUpdate.Style.Padding = new Padding(2, 18, 0, 18);
                         dataGridViewStock.Rows[index].Cells[6] = btnUpdate;
 
                         DataGridViewButtonCell btnDelete = ItemComponent.CreateButtonSubstract("Delete");
-                        btnDelete.Style.Padding = new Padding(2, 16, 0, 16);
+                        btnDelete.Style.Padding = new Padding(2, 18, 0, 18);
                         dataGridViewStock.Rows[index].Cells[7] = btnDelete;
                     }
                 }
@@ -92,9 +92,9 @@ namespace InventoryWindowApp.View.Component
             {
                 var stock = new StockUpdateReq()
                 {
-                    Id = columnId.Cells[0].Value.ToString()!,
+                    Id = columnId.Cells[1].Value.ToString()!,
                     
-                    Qty = Convert.ToInt32(columnId.Cells[2].Value ?? 0),
+                    Qty = Convert.ToInt32(columnId.Cells[3].Value ?? 0),
                     Status = columnId.Cells[4].Value.ToString()!,
                     Note = columnId.Cells[5].Value.ToString()!,
                 };

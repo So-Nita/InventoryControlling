@@ -57,9 +57,8 @@
             productCenterPanel.Controls.Add(dataGridViewStock);
             productCenterPanel.Controls.Add(label1);
             productCenterPanel.Location = new Point(0, 0);
-            productCenterPanel.Margin = new Padding(3, 4, 3, 4);
             productCenterPanel.Name = "productCenterPanel";
-            productCenterPanel.Size = new Size(1379, 753);
+            productCenterPanel.Size = new Size(1207, 565);
             productCenterPanel.TabIndex = 2;
             // 
             // btnCreateStock
@@ -68,10 +67,9 @@
             btnCreateStock.BackColor = Color.FromArgb(98, 102, 244);
             btnCreateStock.Cursor = Cursors.Hand;
             btnCreateStock.ForeColor = Color.White;
-            btnCreateStock.Location = new Point(1221, 22);
-            btnCreateStock.Margin = new Padding(3, 4, 3, 4);
+            btnCreateStock.Location = new Point(1068, 16);
             btnCreateStock.Name = "btnCreateStock";
-            btnCreateStock.Size = new Size(120, 53);
+            btnCreateStock.Size = new Size(105, 40);
             btnCreateStock.TabIndex = 6;
             btnCreateStock.Text = "Add New";
             btnCreateStock.UseVisualStyleBackColor = false;
@@ -89,10 +87,9 @@
             panel1.Controls.Add(label7);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(label4);
-            panel1.Location = new Point(59, 87);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Location = new Point(52, 65);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1282, 40);
+            panel1.Size = new Size(1122, 30);
             panel1.TabIndex = 5;
             panel1.UseWaitCursor = true;
             // 
@@ -100,9 +97,9 @@
             // 
             label9.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label9.AutoSize = true;
-            label9.Location = new Point(19, 9);
+            label9.Location = new Point(17, 7);
             label9.Name = "label9";
-            label9.Size = new Size(24, 20);
+            label9.Size = new Size(18, 15);
             label9.TabIndex = 7;
             label9.Text = "ID";
             label9.UseWaitCursor = true;
@@ -111,9 +108,9 @@
             // 
             label6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label6.AutoSize = true;
-            label6.Location = new Point(1228, 9);
+            label6.Location = new Point(1080, 7);
             label6.Name = "label6";
-            label6.Size = new Size(52, 20);
+            label6.Size = new Size(42, 15);
             label6.TabIndex = 6;
             label6.Text = "Action";
             label6.UseWaitCursor = true;
@@ -122,9 +119,9 @@
             // 
             label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label3.AutoSize = true;
-            label3.Location = new Point(627, 9);
+            label3.Location = new Point(531, 7);
             label3.Name = "label3";
-            label3.Size = new Size(49, 20);
+            label3.Size = new Size(39, 15);
             label3.TabIndex = 5;
             label3.Text = "Name";
             label3.UseWaitCursor = true;
@@ -133,9 +130,9 @@
             // 
             label8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label8.AutoSize = true;
-            label8.Location = new Point(1042, 9);
+            label8.Location = new Point(925, 7);
             label8.Name = "label8";
-            label8.Size = new Size(42, 20);
+            label8.Size = new Size(33, 15);
             label8.TabIndex = 4;
             label8.Text = "Note";
             label8.UseWaitCursor = true;
@@ -144,9 +141,9 @@
             // 
             label7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label7.AutoSize = true;
-            label7.Location = new Point(834, 9);
+            label7.Location = new Point(730, 7);
             label7.Name = "label7";
-            label7.Size = new Size(65, 20);
+            label7.Size = new Size(53, 15);
             label7.TabIndex = 3;
             label7.Text = "Quantity";
             label7.UseWaitCursor = true;
@@ -155,9 +152,9 @@
             // 
             label5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label5.AutoSize = true;
-            label5.Location = new Point(939, 9);
+            label5.Location = new Point(822, 7);
             label5.Name = "label5";
-            label5.Size = new Size(49, 20);
+            label5.Size = new Size(39, 15);
             label5.TabIndex = 2;
             label5.Text = "Status";
             label5.UseWaitCursor = true;
@@ -166,9 +163,9 @@
             // 
             label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label4.AutoSize = true;
-            label4.Location = new Point(312, 9);
+            label4.Location = new Point(273, 7);
             label4.Name = "label4";
-            label4.Size = new Size(79, 20);
+            label4.Size = new Size(63, 15);
             label4.TabIndex = 1;
             label4.Text = "Product ID";
             label4.UseWaitCursor = true;
@@ -193,8 +190,7 @@
             dataGridViewCellStyle1.SelectionForeColor = Color.Black;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             dataGridViewStock.DefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewStock.Location = new Point(59, 127);
-            dataGridViewStock.Margin = new Padding(3, 4, 3, 4);
+            dataGridViewStock.Location = new Point(52, 95);
             dataGridViewStock.Name = "dataGridViewStock";
             dataGridViewStock.ReadOnly = true;
             dataGridViewStock.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Sunken;
@@ -210,7 +206,7 @@
             dataGridViewStock.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridViewStock.RowTemplate.Height = 25;
             dataGridViewStock.ScrollBars = ScrollBars.Vertical;
-            dataGridViewStock.Size = new Size(1279, 613);
+            dataGridViewStock.Size = new Size(1119, 460);
             dataGridViewStock.TabIndex = 4;
             dataGridViewStock.UseWaitCursor = true;
             // 
@@ -219,21 +215,22 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.Gray;
-            label1.Location = new Point(57, 27);
+            label1.Location = new Point(50, 20);
             label1.Name = "label1";
-            label1.Size = new Size(308, 37);
+            label1.Size = new Size(241, 30);
             label1.TabIndex = 0;
             label1.Text = "List of stock transaction";
             label1.UseWaitCursor = true;
             // 
             // StockingView
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1379, 753);
+            ClientSize = new Size(1207, 565);
             Controls.Add(productCenterPanel);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "StockingView";
             Text = "StockingView";
             productCenterPanel.ResumeLayout(false);

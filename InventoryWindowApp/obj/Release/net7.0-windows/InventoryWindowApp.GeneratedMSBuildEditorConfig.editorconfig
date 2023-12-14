@@ -14,6 +14,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = InventoryWindowApp
-build_property.ProjectDir = C:\Users\Back-End.07\Downloads\OOAD\InventoryControlling\InventoryWindowApp\
+build_property.ProjectDir = D:\MyFolder\InventoryControlling\InventoryWindowApp\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

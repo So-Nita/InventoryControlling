@@ -15,7 +15,7 @@ namespace InventoryWindowApp.View
         private readonly ProductService _productService;
         private readonly OrderService _orderService;
         private readonly CategoryService _categoryService;
-        private readonly string DefaultImg = "https://m.media-amazon.com/images/I/81h3AcrJ6pL.jpg";
+        private readonly string DefaultImg = "https://cdn.spinn.com/assets/img/empty.jpeg";
         private List<ProductResponse> Carts { get; set; } = new List<ProductResponse>();
 
         public HomeView()
