@@ -19,7 +19,7 @@ public class ProductService : IProductService
     {
         _unitOfWork = unitOfWork;
     }
-    
+       
     public Response<string> Create(ProductCreateReq req)
     {
         var validationErrors = DataValidation<ProductCreateReq>.ValidateDynamicTypes(req);
@@ -44,6 +44,7 @@ public class ProductService : IProductService
             Name = req.Name,
             Price = req.Price,
             Cost = req.Cost,
+            Qty = 0,
             Image = image!,
             Description = req.Description,
             CategoryId = req.CategoryId,
@@ -62,29 +63,13 @@ public class ProductService : IProductService
             return Response<string>.Fail("Failed Create Product.");
         }
     }
-    private string DefaultImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHNXEIpQNJp1iixgogbJk5quiWkQk3MoarYQ&usqp=CAU";
-
+    private string DefaultImage = "https://cdn.spinn.com/assets/img/empty.jpeg";
     public Response<List<ProductResponse>> ReadAll()
     {
         try
         {
-            var products = _unitOfWork.GetRepository<Product>()
-            .GetQueryable().Where(e => e.IsDeleted == false)
-            .Include(e => e.Category)
-            .Select(e => new ProductResponse()
-            {
-                Id = e.Id,
-                Code = e.Code,
-                Name = e.Name,
-                Price = e.Price,
-                Cost = e.Cost,
-                Image = e.Image??DefaultImage,
-                Qty = e.Qty,
-                Description = e.Description!,
-                CreatedAt = e.CreatedAt,
-                CategoryId = e.CategoryId,
-                CategoryName = e.Category.Name
-            }).ToList();
+            var products = GetAll().Result!.Where(e => e.IsDeleted == false).ToList();
+
             return Response<List<ProductResponse>>.Success(products,products.Count());
         }
         catch(ArgumentException ex)
@@ -97,27 +82,40 @@ public class ProductService : IProductService
     {
         try
         {
+            var product = GetAll().Result!.FirstOrDefault(e => e.Id == key.Id && e.IsDeleted == false);
+
+            return Response<ProductResponse>.Success(product)!;
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex);
+            return null!;
+        }
+    }
+
+    private Response<List<ProductResponse>> GetAll()
+    {
+        try
+        {
             var product = _unitOfWork.GetRepository<Product>().GetQueryable()
-                // .Where(e=>e.Id==key.Id || e.Code==key.Code)
-                .Where(e => e.Id == key.Id)
-                .Where(e=>e.IsDeleted==false)
-                .Include(e =>e.Category)
-                .Select(e=> new ProductResponse()
+                .Include(e => e.Category)
+                .Select(e => new ProductResponse()
                 {
                     Id = e.Id,
                     Name = e.Name,
                     Code = e.Code,
                     Price = e.Price,
                     Cost = e.Cost,
-                    Qty = e.Qty,
+                    Qty = e.Qty.ToString().IsNullOrEmpty() ? 0 : e.Qty,
                     Image = e.Image ?? default!,
                     CategoryId = e.CategoryId,
-                    CategoryName = e.Category.Name
-                }).First();
-            
-            return Response<ProductResponse>.Success(product)!;
+                    CategoryName = e.Category.Name,
+                    IsDeleted = e.IsDeleted
+                }).ToList();
+
+            return Response<List<ProductResponse>>.Success(product)!;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine(ex);
             return null!;
@@ -192,10 +190,10 @@ public class ProductService : IProductService
             return Response<string>.Fail("Failed to delete product.");
         }
     }
- 
-    public Response<string> ReActiveProduct(Key key)
+    
+    public Response<string> ReActive(Key key)
     {
-        if (key == null)
+        if (key.Id == null)
         {
             return Response<string>.Fail("Product id is required.");
         }
@@ -211,6 +209,37 @@ public class ProductService : IProductService
         catch (Exception e)
         {
             return Response<string>.Fail("Failed to reactive product.");
+        }
+    }
+    public Response<List<ProductResponse>> ReadAllDeleted()
+    {
+        try
+        {
+            /*var products = _unitOfWork.GetRepository<Product>()
+            .GetQueryable().Where(e => e.IsDeleted == true)
+            .Include(e => e.Category)
+            .Select(e => new ProductResponse()
+            {
+                Id = e.Id,
+                Code = e.Code,
+                Name = e.Name,
+                Price = e.Price,
+                Cost = e.Cost,
+                Image = e.Image ?? DefaultImage,
+                Qty = e.Qty.ToString().IsNullOrEmpty()?0:e.Qty,
+                Description = e.Description!,
+                CreatedAt = e.CreatedAt,
+                CategoryId = e.CategoryId,
+                CategoryName = e.Category.Name,
+                IsDeleted = e.IsDeleted
+            }).ToList();*/
+
+            var products = GetAll().Result.Where(e=>e.IsDeleted==true).ToList();    
+            return Response<List<ProductResponse>>.Success(products, products.Count());
+        }
+        catch (ArgumentException ex)
+        {
+            return Response<List<ProductResponse>>.Fail();
         }
     }
 }

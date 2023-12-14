@@ -31,7 +31,9 @@ namespace InventoryLib.Validation
         }
         private static void ValidateString(string propertyName, string value, bool isRequired, List<string> errors)
         {
-            if (isRequired && string.IsNullOrEmpty(value) || value.Trim() == "")
+            var _value = "";
+            if(value != null) { _value = value; }
+            if (isRequired==true && string.IsNullOrEmpty(value))
             {
                 errors.Add($"Field {propertyName} is required.");
             }

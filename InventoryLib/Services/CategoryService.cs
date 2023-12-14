@@ -5,6 +5,7 @@ using InventoryLib.Models;
 using InventoryLib.Models.Request.Category;
 using InventoryLib.Models.Request.Product;
 using InventoryLib.Models.Response.Category;
+using InventoryLib.Models.Response.Product;
 using InventoryLib.UnitOfWork;
 using InventoryLib.Validation;
 using Microsoft.EntityFrameworkCore.Update.Internal;
@@ -54,7 +55,13 @@ namespace InventoryLib.Services
                                 Id = e.Id,
                                 Name = e.Name,
                                 Image = e.Image,
-                                Description = e.Description
+                                Description = e.Description,
+                                Products = e.Products.Select(p=> new ProductResponse()
+                                {
+                                    Id= p.Id,
+                                    Name= p.Name,
+                                    Qty = p.Qty
+                                }).ToList()
                             }).ToList();
                 return Response<List<CategoryResponse>>.Success(categories, categories.Count());
 
@@ -78,11 +85,12 @@ namespace InventoryLib.Services
                 {
                     return Response<string>.Conflict("Conflict Category's name is existing.");
                 }
+                var image = req.Image.IsNullOrEmpty() ? DefaultImage : req.Image;
                 var category = new Category()
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = req.Name,
-                    Image = req.Image!,
+                    Image = image!,
                     Description = req.Description,
                     CreatedAt = DateTime.Now,
                     IsDeleted = false
@@ -98,6 +106,7 @@ namespace InventoryLib.Services
                 return Response<string>.Fail("Failed to Create Category.");
             }
         }
+        private readonly string DefaultImage = "https://cdn.spinn.com/assets/img/empty.jpeg";
 
         public Response<string> Update(CategoryUpdateReq req)
         {

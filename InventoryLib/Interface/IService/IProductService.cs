@@ -8,7 +8,8 @@ namespace InventoryLib.Interface;
 
 public interface IProductService : IService<ProductResponse,ProductCreateReq,ProductUpdateReq>
 {
-    public Response<string> ReActiveProduct(Key id);
+    public Response<string> ReActive(Key key);
+    public Response<List<ProductResponse>> ReadAllDeleted();
     //Task<List<ProductResponse>> GetAllProducts();
 
     //Task<Product> GetProductById(Key key);

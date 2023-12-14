@@ -98,25 +98,17 @@ namespace InventoryLib.Services
         {
             try
             {
-                var stock = _unitWork.GetRepository<Product>().GetQueryable()
-                            .Where(e => e.Id == key.Id && e.IsDeleted == false)
-                            .Include(e=>e.Stockings)
+                var stock = _unitWork.GetRepository<Stocking>().GetQueryable()
+                            .Include(e=>e.Product)
                             .Select(e => new StockingResponse()
                              {
-                                 ProductId = e.Id,
-                                 ProductName = e.Name,
-                                 Price = e.Price,
-                                 Qty = e.Qty ?? 0,
-                                 Stockings = e.Stockings.Select(s => new ProductStocking()
-                                 {
-                                     Id = s.Id,
-                                     ProductId = s.ProductId,
-                                     ProductName = e.Name,
-                                     Qty = s.Qty,
-                                     Status = s.Status.ToString(),
-                                     Note = s.Note,
-                                     TransactionDate = s.TransactionDate
-                                 }).ToList()
+                                 Id = e.Id,
+                                 ProductId = e.ProductId,
+                                 ProductName = e.Product.Name,
+                                 Status = e.Status.ToString(),
+                                 Note = e.Note,
+                                 Qty = e.Qty,
+                                 TransactionDate = e.TransactionDate
                              }).First();
                 
                 return Response<StockingResponse>.Success(stock)!;
@@ -132,25 +124,17 @@ namespace InventoryLib.Services
         {
             try
             {
-                var stocks = _unitWork.GetRepository<Product>().GetQueryable()
-                            .Where(e => e.Stockings.Count != 0)
-                            .Include(e => e.Stockings)
+                var stocks = _unitWork.GetRepository<Stocking>().GetQueryable()
+                            .Include(e => e.Product)
                             .Select(e => new StockingResponse()
                             {
+                                Id = e.Id,
                                 ProductId = e.Id,
-                                ProductName = e.Name,
-                                Price = e.Price,
-                                Qty = (int)e.Qty!,
-                                Stockings = e.Stockings!.Select(s => new ProductStocking()
-                                {
-                                    Id = s.Id,
-                                    ProductId = s.ProductId,
-                                    ProductName = e.Name,
-                                    Qty = s.Qty,
-                                    Status = s.Status.ToString(),
-                                    Note = s.Note,
-                                    TransactionDate = s.TransactionDate
-                                }).ToList()
+                                ProductName = e.Product!.Name,
+                                Qty = e.Qty,
+                                Status = e.Status.ToString(),
+                                Note = e.Note,
+                                TransactionDate = e.TransactionDate
                             }).ToList();
                
                 return Response<List<StockingResponse>>.Success(stocks, stocks.Count())!;
@@ -237,7 +221,39 @@ namespace InventoryLib.Services
                 return Response<string>.Fail();
             }
         }
- 
+
+        public Response<List<ProductStocking>> ReadAllByProudct()
+        {
+            try
+            {
+                var stock = _unitWork.GetRepository<Product>().GetQueryable()
+                            .Where(e=>e.Stockings.Any())
+                            .Include(e => e.Stockings)
+                            .Select(e => new ProductStocking()
+                            {
+                                ProductId = e.Id,
+                                ProductName = e.Name,
+                                Qty = e.Qty ?? 0,
+                                Stockings = e.Stockings!.Select(s => new StockingResponse()
+                                {
+                                    Id = s.Id,
+                                    ProductId = s.ProductId,
+                                    ProductName = e.Name,
+                                    Qty = s.Qty,
+                                    Status = s.Status.ToString(),
+                                    Note = s.Note,
+                                    TransactionDate = s.TransactionDate
+                                }).ToList()
+                            }).ToList();
+
+                return Response<List<ProductStocking>>.Success(stock,stock.Count())!;
+            }
+            catch (Exception ec)
+            {
+                Console.Write(ec);
+                return Response<List<ProductStocking>>.Fail();
+            }
+        }
     }
 
 

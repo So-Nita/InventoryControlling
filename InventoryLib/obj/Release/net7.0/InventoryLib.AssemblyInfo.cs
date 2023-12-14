@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InventoryLib")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6e6e69531cb0021dfd33b8459cf4b9df91cc1ba1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+82962decb46db5c3a3d0870ea15eeff127c6a37a")]
 [assembly: System.Reflection.AssemblyProductAttribute("InventoryLib")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InventoryLib")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

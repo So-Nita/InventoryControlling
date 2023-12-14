@@ -15,4 +15,5 @@ public class ProductResponse : IResponse
     public DateTime? CreatedAt { get; set; }
     public string CategoryId { get; set; }= null!;
     public string CategoryName { get; set; } = null!;
+    public bool? IsDeleted { get; set; }    
 }
