@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryConsole\\InventoryConsole.csproj": {}
+    "D:\\MyFolder\\InventoryControlling\\InventoryConsole\\InventoryConsole.csproj": {}
   },
   "projects": {
-    "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj": {
+    "D:\\MyFolder\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj",
+        "projectUniqueName": "D:\\MyFolder\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj",
         "projectName": "InventoryApiClient",
-        "projectPath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj",
-        "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-        "outputPath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryApiClient\\obj\\",
+        "projectPath": "D:\\MyFolder\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj",
+        "packagesPath": "C:\\Users\\Back-End.07\\.nuget\\packages\\",
+        "outputPath": "D:\\MyFolder\\InventoryControlling\\InventoryApiClient\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Back-End.07\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,21 +61,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryConsole\\InventoryConsole.csproj": {
+    "D:\\MyFolder\\InventoryControlling\\InventoryConsole\\InventoryConsole.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryConsole\\InventoryConsole.csproj",
+        "projectUniqueName": "D:\\MyFolder\\InventoryControlling\\InventoryConsole\\InventoryConsole.csproj",
         "projectName": "InventoryConsole",
-        "projectPath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryConsole\\InventoryConsole.csproj",
-        "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-        "outputPath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryConsole\\obj\\",
+        "projectPath": "D:\\MyFolder\\InventoryControlling\\InventoryConsole\\InventoryConsole.csproj",
+        "packagesPath": "C:\\Users\\Back-End.07\\.nuget\\packages\\",
+        "outputPath": "D:\\MyFolder\\InventoryControlling\\InventoryConsole\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Back-End.07\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -89,8 +89,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj": {
-                "projectPath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj"
+              "D:\\MyFolder\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj": {
+                "projectPath": "D:\\MyFolder\\InventoryControlling\\InventoryApiClient\\InventoryApiClient.csproj"
               }
             }
           }
@@ -126,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

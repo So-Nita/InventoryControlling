@@ -334,45 +334,49 @@ namespace InventoryConsole
         // Create Date 
         private async void DisplayCreateProducts()
         {
-            var newProduct = new ProductCreateReq();
-            Console.Write("Enter product code: "); newProduct.Code = Console.ReadLine();
-            Console.Write("Enter product name: "); newProduct.Name = Console.ReadLine();
+            Console.Write("Enter product code: "); var code = Console.ReadLine() ;
+            Console.Write("Enter product name: "); var name = Console.ReadLine() ;
             Console.Write("Enter product cost: ");
-            if (decimal.TryParse(Console.ReadLine(), out decimal cost))
-            {
-                newProduct.Cost = cost;
-            }
+            decimal cost=0;
+            decimal price = 0;
+            if (decimal.TryParse(Console.ReadLine(), out decimal _cost)) { cost = _cost; }
             else
             {
                 Console.WriteLine("Invalid input for cost. Exiting...");
                 return;
             }
             Console.Write("Enter product price: ");
-            if (decimal.TryParse(Console.ReadLine(), out decimal price))
+            if (decimal.TryParse(Console.ReadLine(), out decimal _price))
             {
-                newProduct.Price = price;
+                price = _price;
             }
             else
             {
                 Console.WriteLine("Invalid input for price. Exiting...");
                 return;
             }
-            Console.Write("Enter category ID: "); newProduct.CategoryId = Console.ReadLine();
-            Console.Write("Enter product image URL (optional): "); newProduct.Image = Console.ReadLine();
-            if (newProduct.Image == "")
+            Console.Write("Enter category ID: "); var categoryId = Console.ReadLine().Trim();
+            Console.Write("Enter product image URL (optional): "); var image = Console.ReadLine().Trim();
+            if (image == "")
             {
-                newProduct.Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBVm97ffff3JtR09e4xkkjys5SXrlPv3coTQ&usqp=CAU";
+                image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBVm97ffff3JtR09e4xkkjys5SXrlPv3coTQ&usqp=CAU";
             }
-            Console.Write("Enter product description (optional): ");  newProduct.Description = Console.ReadLine();
+            Console.Write("Enter product description (optional): ");  var description = Console.ReadLine();
+            var newProduct = new ProductCreateReq()
+            {
+                Code = code.Trim(),
+                Name = name.Trim(),
+                Cost = cost,
+                Price = price,
+                CategoryId = categoryId.Trim(),
+                Image = image,
+                Description = description.Trim(),
+            };
 
             var result = await _productService.CreateAsync(newProduct);
             if (result.Equals(200))
             {
                 Console.WriteLine("\nCreate Product Successfully.");
-            }
-            else
-            {
-                Console.WriteLine($"\nSomething Went wrong. Error: {result}");
             }
         }
 
@@ -474,14 +478,14 @@ namespace InventoryConsole
         {
             var products = _productService.ReadAllAsync().Result;
             Console.WriteLine("\n================================================================================================ Product List =================================================================================================");
-            Console.WriteLine("\n{0,-38} {1,-15} {2,-20} {3,-38} {4,-15} {5,-10} {6,-10} {7,-22} {8,-15}",
+            Console.WriteLine("\n{0,-38} {1,-15} {2,-38} {3,-38} {4,-15} {5,-10} {6,-10} {7,-22} {8,-15}",
                               " ID", "Code", "Name", "CategoryId", "CategoryName", "Cost", "Price", "CreatedAt", "Description");
             Console.WriteLine("\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             if(products != null)
             {
                 foreach (var product in products)
                 {
-                    Console.WriteLine($" {product.Id,-38} {product.Code,-15} {product.Name,-20} {product.CategoryId,-38} {product.CategoryName,-15} " +
+                    Console.WriteLine($" {product.Id,-38} {product.Code,-15} {product.Name,-38} {product.CategoryId,-38} {product.CategoryName,-15} " +
                                       $" {product.Cost,-10:C} {product.Price,-10:C} {product.CreatedAt?.ToString("MM/dd/yyyy HH:mm:ss"),-22} {product.Description,-15}");
                 }
             }
