@@ -246,3 +246,4 @@ C:\Users\Back-End.07\Downloads\OOAD\InventoryControlling\InventoryWebApi\obj\Rel
 C:\Users\Back-End.07\Downloads\OOAD\InventoryControlling\InventoryWebApi\obj\Release\net7.0\InventoryWebApi.genruntimeconfig.cache
 C:\Users\Back-End.07\Downloads\OOAD\InventoryControlling\InventoryWebApi\obj\Release\net7.0\ref\InventoryWebApi.dll
 C:\Users\Back-End.07\Downloads\OOAD\InventoryControlling\InventoryWebApi\bin\Release\net7.0\libman.json
+D:\MyFolder\InventoryControlling\InventoryWebApi\bin\Release\net7.0\libman.json

@@ -44,7 +44,21 @@ public class ProductController : ControllerBase
             return BadRequest(e.Message);
         }        
     }
+    [HttpGet("readDeletedProduct")]
 
+    public IActionResult GetAllDeletedProducts()
+    {
+        try
+        {
+            var products = _service.ReadAllDeleted();
+            if (products == null) { return BadRequest("Something went wrong."); }
+            return Ok(products);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
     [HttpPost]
     public IActionResult CreateProduct([FromBody] ProductCreateReq request)
     {
@@ -87,6 +101,23 @@ public class ProductController : ControllerBase
         try
         {
             var product = _service.Delete(request.Id!);
+            if (product.Status != (int)ResponseStatusType.Success)
+            {
+                return BadRequest(product);
+            }
+            return Ok(product);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+    [HttpPut("reActive")]
+    public IActionResult ReActiveDelete([FromBody] Key request)
+    {
+        try
+        {
+            var product = _service.ReActive(request!);
             if (product.Status != (int)ResponseStatusType.Success)
             {
                 return BadRequest(product);

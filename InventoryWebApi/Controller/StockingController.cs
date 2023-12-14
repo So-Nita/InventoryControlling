@@ -27,7 +27,16 @@ namespace InventoryWebApi.Controller
             }
             return Ok(data);
         }
-
+        [HttpGet("readByProduct")]
+        public IActionResult ReadAllByProduct()
+        {
+            var data = _service.ReadAllByProudct();
+            if (data.Status != (int)ResponseStatusType.Success)
+            {
+                return BadRequest(data);
+            }
+            return Ok(data);
+        }
         [HttpPost]
         public IActionResult Create([FromBody] StockingCreateReq req)
         {

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryWebApi\\InventoryWebApi.csproj": {}
+    "D:\\MyFolder\\InventoryControlling\\InventoryWebApi\\InventoryWebApi.csproj": {}
   },
   "projects": {
-    "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryLib\\InventoryLib.csproj": {
+    "D:\\MyFolder\\InventoryControlling\\InventoryLib\\InventoryLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryLib\\InventoryLib.csproj",
+        "projectUniqueName": "D:\\MyFolder\\InventoryControlling\\InventoryLib\\InventoryLib.csproj",
         "projectName": "InventoryLib",
-        "projectPath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryLib\\InventoryLib.csproj",
-        "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-        "outputPath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryLib\\obj\\",
+        "projectPath": "D:\\MyFolder\\InventoryControlling\\InventoryLib\\InventoryLib.csproj",
+        "packagesPath": "C:\\Users\\Back-End.07\\.nuget\\packages\\",
+        "outputPath": "D:\\MyFolder\\InventoryControlling\\InventoryLib\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Back-End.07\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,21 +83,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryWebApi\\InventoryWebApi.csproj": {
+    "D:\\MyFolder\\InventoryControlling\\InventoryWebApi\\InventoryWebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryWebApi\\InventoryWebApi.csproj",
+        "projectUniqueName": "D:\\MyFolder\\InventoryControlling\\InventoryWebApi\\InventoryWebApi.csproj",
         "projectName": "InventoryWebApi",
-        "projectPath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryWebApi\\InventoryWebApi.csproj",
-        "packagesPath": "C:\\Users\\MSI\\.nuget\\packages\\",
-        "outputPath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryWebApi\\obj\\",
+        "projectPath": "D:\\MyFolder\\InventoryControlling\\InventoryWebApi\\InventoryWebApi.csproj",
+        "packagesPath": "C:\\Users\\Back-End.07\\.nuget\\packages\\",
+        "outputPath": "D:\\MyFolder\\InventoryControlling\\InventoryWebApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\MSI\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Back-End.07\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -111,8 +111,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryLib\\InventoryLib.csproj": {
-                "projectPath": "D:\\Sonita\\InventoryControlling\\InventoryControlling\\InventoryLib\\InventoryLib.csproj"
+              "D:\\MyFolder\\InventoryControlling\\InventoryLib\\InventoryLib.csproj": {
+                "projectPath": "D:\\MyFolder\\InventoryControlling\\InventoryLib\\InventoryLib.csproj"
               }
             }
           }
@@ -167,7 +167,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -8,18 +8,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAZsymZ8miAUmEEzRq46/h4gAAAAACAAAAAAADZgAAwAAAABAAAABadsUk97Z136DrRTAwKcljAAAAAASAAACgAAAAEAAAAIVlEipLu4Ny+xQRqsfmoh0gAAAAUCGFpuJ5n+KcqGy8yWwLd+5Pc2GoisnQy3uTTu7CxEIUAAAAkybFzD9vjKNGNhiAbFBlYzdlh6A=</EncryptedPassword>
     <_PublishTargetUrl>ftp://win5248.site4now.net:21/inventoryapi</_PublishTargetUrl>
-    <History>True|2023-12-09T03:18:02.9081437Z;False|2023-12-09T10:17:11.2468352+07:00;True|2023-12-09T10:01:16.0641617+07:00;False|2023-12-09T10:00:06.3955904+07:00;True|2023-12-09T09:09:15.5223449+07:00;False|2023-12-09T09:07:55.2787359+07:00;False|2023-12-08T13:44:47.9890874+07:00;False|2023-12-08T13:32:22.1348011+07:00;False|2023-12-08T13:30:01.5703643+07:00;False|2023-12-08T13:29:15.2911020+07:00;False|2023-12-08T13:28:01.6218118+07:00;False|2023-12-08T13:26:05.6174817+07:00;False|2023-12-08T13:25:29.9043000+07:00;</History>
+    <History>True|2023-12-12T06:43:42.5607327Z;False|2023-12-12T13:42:36.8275176+07:00;True|2023-12-09T10:18:02.9081437+07:00;False|2023-12-09T10:17:11.2468352+07:00;True|2023-12-09T10:01:16.0641617+07:00;False|2023-12-09T10:00:06.3955904+07:00;True|2023-12-09T09:09:15.5223449+07:00;False|2023-12-09T09:07:55.2787359+07:00;False|2023-12-08T13:44:47.9890874+07:00;False|2023-12-08T13:32:22.1348011+07:00;False|2023-12-08T13:30:01.5703643+07:00;False|2023-12-08T13:29:15.2911020+07:00;False|2023-12-08T13:28:01.6218118+07:00;False|2023-12-08T13:26:05.6174817+07:00;False|2023-12-08T13:25:29.9043000+07:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
-      <publishTime>12/07/2023 12:03:03</publishTime>
+      <publishTime>12/11/2023 09:53:23</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>12/07/2023 12:03:03</publishTime>
+      <publishTime>12/11/2023 09:53:23</publishTime>
     </File>
     <File Include="appsettings.production.json">
-      <publishTime>12/09/2023 10:17:21</publishTime>
+      <publishTime>12/12/2023 13:42:58</publishTime>
     </File>
     <File Include="AutoMapper.dll">
       <publishTime>01/16/2023 22:41:56</publishTime>
@@ -37,28 +37,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/29/2022 22:04:04</publishTime>
     </File>
     <File Include="InventoryLib.dll">
-      <publishTime>12/09/2023 10:16:23</publishTime>
+      <publishTime>12/12/2023 13:41:38</publishTime>
     </File>
     <File Include="InventoryLib.pdb">
-      <publishTime>12/09/2023 10:16:23</publishTime>
+      <publishTime>12/12/2023 13:41:38</publishTime>
     </File>
     <File Include="InventoryWebApi.deps.json">
-      <publishTime>12/09/2023 10:17:16</publishTime>
+      <publishTime>12/12/2023 13:42:53</publishTime>
     </File>
     <File Include="InventoryWebApi.dll">
-      <publishTime>12/09/2023 10:17:16</publishTime>
+      <publishTime>12/12/2023 13:42:53</publishTime>
     </File>
     <File Include="InventoryWebApi.exe">
-      <publishTime>12/09/2023 10:17:16</publishTime>
+      <publishTime>12/12/2023 13:42:53</publishTime>
     </File>
     <File Include="InventoryWebApi.pdb">
-      <publishTime>12/09/2023 10:17:16</publishTime>
+      <publishTime>12/12/2023 13:42:53</publishTime>
     </File>
     <File Include="InventoryWebApi.runtimeconfig.json">
-      <publishTime>12/09/2023 10:17:16</publishTime>
+      <publishTime>12/12/2023 13:42:53</publishTime>
     </File>
     <File Include="libman.json">
-      <publishTime>12/08/2023 13:45:16</publishTime>
+      <publishTime>12/11/2023 09:53:23</publishTime>
     </File>
     <File Include="Microsoft.AspNetCore.OpenApi.dll">
       <publishTime>10/21/2023 00:31:08</publishTime>
@@ -202,7 +202,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/23/2021 06:49:44</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>12/09/2023 10:17:21</publishTime>
+      <publishTime>12/12/2023 13:42:58</publishTime>
     </File>
   </ItemGroup>
   <ItemGroup>

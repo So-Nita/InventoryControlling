@@ -1,6 +1,7 @@
 D:\MyFolder\InventoryControlling\InventoryWebApi\obj\Release\net7.0\PubTmp\Out\InventoryWebApi.exe
 D:\MyFolder\InventoryControlling\InventoryWebApi\obj\Release\net7.0\PubTmp\Out\appsettings.Development.json
 D:\MyFolder\InventoryControlling\InventoryWebApi\obj\Release\net7.0\PubTmp\Out\appsettings.json
+D:\MyFolder\InventoryControlling\InventoryWebApi\obj\Release\net7.0\PubTmp\Out\libman.json
 D:\MyFolder\InventoryControlling\InventoryWebApi\obj\Release\net7.0\PubTmp\Out\InventoryWebApi.dll
 D:\MyFolder\InventoryControlling\InventoryWebApi\obj\Release\net7.0\PubTmp\Out\InventoryWebApi.deps.json
 D:\MyFolder\InventoryControlling\InventoryWebApi\obj\Release\net7.0\PubTmp\Out\InventoryWebApi.runtimeconfig.json

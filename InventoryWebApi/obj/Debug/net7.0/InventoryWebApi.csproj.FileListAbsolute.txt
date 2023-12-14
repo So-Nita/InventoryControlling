@@ -583,3 +583,4 @@ D:\Sonita\InventoryControlling\InventoryControlling\InventoryWebApi\obj\Debug\ne
 D:\Sonita\InventoryControlling\InventoryControlling\InventoryWebApi\obj\Debug\net7.0\InventoryWebApi.pdb
 D:\Sonita\InventoryControlling\InventoryControlling\InventoryWebApi\obj\Debug\net7.0\InventoryWebApi.genruntimeconfig.cache
 D:\Sonita\InventoryControlling\InventoryControlling\InventoryWebApi\obj\Debug\net7.0\ref\InventoryWebApi.dll
+D:\MyFolder\InventoryControlling\InventoryWebApi\bin\Debug\net7.0\libman.json
