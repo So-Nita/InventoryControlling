@@ -16,16 +16,16 @@ public class StockingService : Service
     {
         try
         {
-            EndPoint = EndPoint.product;
+            EndPoint = EndPoint.stocking;
             var request = new HttpRequestMessage(HttpMethod.Get, GetEndPoint);
             var response = await _httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();
             var data = await response.Content.ReadAsStringAsync();
 
             var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-            var stockingsData = JsonSerializer.Deserialize<StockingsDataResponse>(data, options);
+            var stockingsData = JsonSerializer.Deserialize<DataResponse<List<StockingResponse>>>(data, options);
 
-            return stockingsData?.Result ?? new List<StockingResponse>();
+            return stockingsData.Result!;
         }
         catch (Exception ex)
         {

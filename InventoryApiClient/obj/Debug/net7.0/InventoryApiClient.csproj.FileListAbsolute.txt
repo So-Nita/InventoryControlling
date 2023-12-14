@@ -47,3 +47,16 @@ D:\Sonita\InventoryControlling\InventoryControlling\InventoryApiClient\obj\Debug
 D:\Sonita\InventoryControlling\InventoryControlling\InventoryApiClient\obj\Debug\net7.0\refint\InventoryApiClient.dll
 D:\Sonita\InventoryControlling\InventoryControlling\InventoryApiClient\obj\Debug\net7.0\InventoryApiClient.pdb
 D:\Sonita\InventoryControlling\InventoryControlling\InventoryApiClient\obj\Debug\net7.0\ref\InventoryApiClient.dll
+D:\MyFolder\InventoryControlling\InventoryApiClient\bin\Debug\net7.0\InventoryApiClient.deps.json
+D:\MyFolder\InventoryControlling\InventoryApiClient\bin\Debug\net7.0\InventoryApiClient.dll
+D:\MyFolder\InventoryControlling\InventoryApiClient\bin\Debug\net7.0\InventoryApiClient.pdb
+D:\MyFolder\InventoryControlling\InventoryApiClient\obj\Debug\net7.0\InventoryApiClient.csproj.AssemblyReference.cache
+D:\MyFolder\InventoryControlling\InventoryApiClient\obj\Debug\net7.0\InventoryApiClient.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyFolder\InventoryControlling\InventoryApiClient\obj\Debug\net7.0\InventoryApiClient.AssemblyInfoInputs.cache
+D:\MyFolder\InventoryControlling\InventoryApiClient\obj\Debug\net7.0\InventoryApiClient.AssemblyInfo.cs
+D:\MyFolder\InventoryControlling\InventoryApiClient\obj\Debug\net7.0\InventoryApiClient.csproj.CoreCompileInputs.cache
+D:\MyFolder\InventoryControlling\InventoryApiClient\obj\Debug\net7.0\InventoryApiClient.sourcelink.json
+D:\MyFolder\InventoryControlling\InventoryApiClient\obj\Debug\net7.0\InventoryApiClient.dll
+D:\MyFolder\InventoryControlling\InventoryApiClient\obj\Debug\net7.0\refint\InventoryApiClient.dll
+D:\MyFolder\InventoryControlling\InventoryApiClient\obj\Debug\net7.0\InventoryApiClient.pdb
+D:\MyFolder\InventoryControlling\InventoryApiClient\obj\Debug\net7.0\ref\InventoryApiClient.dll

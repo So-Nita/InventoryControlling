@@ -73,13 +73,17 @@ public class ProductService : Service
             var content = new StringContent(jsonContent, null, "application/json");
             request.Content = content;
             var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
+            var data = response.EnsureSuccessStatusCode();
             Console.WriteLine(await response.Content.ReadAsStringAsync());
-
-            var data = await response.Content.ReadAsStringAsync();
+            var apiData = new DataResponse<string>();
+            if (data.StatusCode.Equals(200))
+            {
+                apiData.Status = 200;
+            }
+           /* var data = await response.Content.ReadAsStringAsync();
 
             var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
-            var apiData = JsonSerializer.Deserialize<DataResponse<string>>(data, options)!;
+            var apiData = JsonSerializer.Deserialize<DataResponse<string>>(data, options)!;*/
 
             //return apiData;
             return apiData;
